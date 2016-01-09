@@ -22,24 +22,16 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing;
+package com.txusballesteros.testing.internal.di;
 
-import org.junit.Before;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-import org.mockito.MockitoAnnotations;
+import com.txusballesteros.testing.api.DashboardApiIntegrationTest;
 
-@RunWith(JUnit4.class)
-public abstract class UnitTest {
-    @Before
-    public final void setup() {
-        initializeMocks();
-        onSetup();
-    }
+import javax.inject.Singleton;
 
-    private void initializeMocks() {
-        MockitoAnnotations.initMocks(this);
-    }
+import dagger.Component;
 
-    protected abstract void onSetup();
+@Singleton
+@Component( modules = IntegrationTestModule.class )
+public interface IntegrationTestComponent {
+    void inject(DashboardApiIntegrationTest test);
 }

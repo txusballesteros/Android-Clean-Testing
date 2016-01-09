@@ -24,22 +24,17 @@
  */
 package com.txusballesteros.testing;
 
+import android.support.test.runner.AndroidJUnit4;
+
 import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-import org.mockito.MockitoAnnotations;
 
-@RunWith(JUnit4.class)
-public abstract class UnitTest {
+@RunWith(AndroidJUnit4.class)
+public abstract class IntegrationTest {
     @Before
     public final void setup() {
-        initializeMocks();
-        onSetup();
+        onInitializeInjection();
     }
 
-    private void initializeMocks() {
-        MockitoAnnotations.initMocks(this);
-    }
-
-    protected abstract void onSetup();
+    protected abstract void onInitializeInjection();
 }

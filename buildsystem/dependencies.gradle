@@ -49,18 +49,24 @@ ext {
     gsonConverterVersion = '2.0.0-beta3'
     glideVersion = '3.6.1'
     butterKnifeVersion = '7.0.1'
+    dexmakerVersion = '1.1'
+    androidTestVersion = '0.4.1'
 
     mobileDependencies = [
-        javaxAnnotation:"org.glassfish:javax.annotation:${javaxAnnotationVersion}",
-        daggerCompiler: "com.google.dagger:dagger-compiler:${daggerVersion}",
-        dagger:         "com.google.dagger:dagger:${daggerVersion}",
-        appcompat:      "com.android.support:appcompat-v7:${androidSupportVersion}",
-        retrofit:       "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-        gsonConverter:  "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-        junit:          "junit:junit:${junitVersion}",
-        mockito:        "org.mockito:mockito-all:${mockitoVersion}",
-        glide:          "com.github.bumptech.glide:glide:${glideVersion}",
-        recyclerView:   "com.android.support:recyclerview-v7:${androidSupportVersion}",
-        butterKnife:    "com.jakewharton:butterknife:${butterKnifeVersion}",
+        javaxAnnotation:  "org.glassfish:javax.annotation:${javaxAnnotationVersion}",
+        daggerCompiler:   "com.google.dagger:dagger-compiler:${daggerVersion}",
+        dagger:           "com.google.dagger:dagger:${daggerVersion}",
+        appcompat:        "com.android.support:appcompat-v7:${androidSupportVersion}",
+        retrofit:         "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+        gsonConverter:    "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+        junit:            "junit:junit:${junitVersion}",
+        mockito:          "org.mockito:mockito-core:${mockitoVersion}",
+        glide:            "com.github.bumptech.glide:glide:${glideVersion}",
+        recyclerView:     "com.android.support:recyclerview-v7:${androidSupportVersion}",
+        butterKnife:      "com.jakewharton:butterknife:${butterKnifeVersion}",
+        dexmaker:         "com.google.dexmaker:dexmaker:${dexmakerVersion}",
+        dexmaker_mockito: "com.google.dexmaker:dexmaker-mockito:${dexmakerVersion}",
+        androidTestRunner:"com.android.support.test:runner:${androidTestVersion}",
+        androidTestRules: "com.android.support.test:rules:${androidTestVersion}",
     ]
 }

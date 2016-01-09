@@ -22,24 +22,37 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing;
+package com.txusballesteros.testing.api;
 
-import org.junit.Before;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-import org.mockito.MockitoAnnotations;
+import com.txusballesteros.testing.IntegrationTest;
+import com.txusballesteros.testing.data.api.DashboardApi;
+import com.txusballesteros.testing.data.api.model.ImageResponse;
+import com.txusballesteros.testing.internal.di.DaggerIntegrationTestComponent;
 
-@RunWith(JUnit4.class)
-public abstract class UnitTest {
-    @Before
-    public final void setup() {
-        initializeMocks();
-        onSetup();
+import org.junit.Test;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNotNull;
+
+public class DashboardApiIntegrationTest extends IntegrationTest {
+    @Inject DashboardApi api;
+
+    @Override
+    protected void onInitializeInjection() {
+        DaggerIntegrationTestComponent.builder()
+                .build()
+                .inject(this);
     }
 
-    private void initializeMocks() {
-        MockitoAnnotations.initMocks(this);
-    }
+    @Test
+    public void shouldGetDashboard() {
+        final List<ImageResponse> response = api.getDashboard();
 
-    protected abstract void onSetup();
+        assertNotNull(response);
+        assertFalse(response.isEmpty());
+    }
 }

@@ -22,24 +22,16 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing;
+package com.txusballesteros.testing.internal.di;
 
-import org.junit.Before;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-import org.mockito.MockitoAnnotations;
+import com.txusballesteros.testing.data.api.endpoint.internal.di.EndpointsModule;
+import com.txusballesteros.testing.data.api.internal.di.ApiModule;
 
-@RunWith(JUnit4.class)
-public abstract class UnitTest {
-    @Before
-    public final void setup() {
-        initializeMocks();
-        onSetup();
-    }
+import dagger.Module;
 
-    private void initializeMocks() {
-        MockitoAnnotations.initMocks(this);
-    }
+@Module ( includes = {
+        ApiModule.class,
+        EndpointsModule.class
 
-    protected abstract void onSetup();
-}
+})
+public class IntegrationTestModule { }

@@ -37,6 +37,7 @@ android {
         targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
         versionCode globalConfiguration.getAt("androidVersionCode")
         versionName globalConfiguration.getAt("androidVersionName")
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
 
     compileOptions {
@@ -54,7 +55,7 @@ android {
 dependencies {
     def mobileDependencies = rootProject.ext.mobileDependencies
     apt mobileDependencies.daggerCompiler
-    compile mobileDependencies.javaxAnnotation
+    provided mobileDependencies.javaxAnnotation
     compile mobileDependencies.dagger
     compile mobileDependencies.appcompat
     compile mobileDependencies.retrofit
@@ -64,4 +65,16 @@ dependencies {
     compile mobileDependencies.butterKnife
     testCompile mobileDependencies.junit
     testCompile mobileDependencies.mockito
+    androidTestApt mobileDependencies.daggerCompiler
+    androidTestProvided mobileDependencies.javaxAnnotation
+    androidTestCompile mobileDependencies.dagger
+    androidTestCompile mobileDependencies.mockito
+    androidTestCompile mobileDependencies.dexmaker
+    androidTestCompile mobileDependencies.dexmaker_mockito
+    androidTestCompile (mobileDependencies.androidTestRunner) {
+        exclude module: 'support-annotations'
+    }
+    androidTestCompile (mobileDependencies.androidTestRules) {
+        exclude module: 'support-annotations'
+    }
 }
