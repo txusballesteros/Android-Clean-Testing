@@ -67,6 +67,5 @@ ext {
         dexmaker:         "com.google.dexmaker:dexmaker:${dexmakerVersion}",
         dexmaker_mockito: "com.google.dexmaker:dexmaker-mockito:${dexmakerVersion}",
         androidTestRunner:"com.android.support.test:runner:${androidTestVersion}",
-        androidTestRules: "com.android.support.test:rules:${androidTestVersion}",
     ]
 }
