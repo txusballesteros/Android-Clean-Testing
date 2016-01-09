@@ -10,6 +10,11 @@ You will can see next kind of tests.
 
 By the way, also I want to show a full example about my personal approach of [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html).
  
+## Acknowledgement
+
+To [Fernando Cejas](https://github.com/android10), for his help on Clean Architecture and for this dependencies configuration of gradle.
+To [Pedro Vicente Gomez](https://github.com/pedrovgs), for his help on Testing and Dagger things. 
+    
 ## License
 
 Copyright Txus Ballesteros 2016 (@txusballesteros)
