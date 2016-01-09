@@ -5,8 +5,9 @@ Here you have a full example project that shows how you can implement different 
 
 You will can see next kind of tests.
 
-* Unit Test
-* Integration Test
+* Unit Tests
+* Integration Tests
+* Instrumentation Tests (Soon)
 
 By the way, also I want to show a full example about my personal approach of [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html).
  
