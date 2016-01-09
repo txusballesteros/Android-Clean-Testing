@@ -12,8 +12,8 @@ By the way, also I want to show a full example about my personal approach of [Cl
  
 ## Acknowledgement
 
-To [Fernando Cejas](https://github.com/android10), for his help on Clean Architecture and for this dependencies configuration of gradle.
-To [Pedro Vicente Gomez](https://github.com/pedrovgs), for his help on Testing and Dagger things. 
+* To [Fernando Cejas](https://github.com/android10), for his help on Clean Architecture and for this dependencies configuration of gradle.
+* To [Pedro Vicente Gomez](https://github.com/pedrovgs), for his help on Testing and Dagger things. 
     
 ## License
 
