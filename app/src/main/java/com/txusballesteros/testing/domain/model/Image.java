@@ -22,25 +22,33 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.internal.di;
+package com.txusballesteros.testing.domain.model;
 
-import com.txusballesteros.testing.Application;
-import com.txusballesteros.testing.domain.repository.DashboardRepository;
-import com.txusballesteros.testing.threading.PostExecutionThread;
-import com.txusballesteros.testing.threading.ThreadExecutor;
+import android.net.Uri;
 
-import javax.inject.Singleton;
+public class Image {
+    private Uri url;
 
-import dagger.Component;
+    private Image() { }
 
-@Singleton
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
-    void inject(Application client);
+    public Uri getUrl() {
+        return url;
+    }
 
-    Application getApplication();
-    ThreadExecutor getThreadExecutor();
-    PostExecutionThread getPostExecutionThread();
+    public static class Builder {
+        private Image image;
 
-    DashboardRepository getDashboardRepository();
+        public Builder() {
+            this.image = new Image();
+        }
+
+        public Builder setUrl(Uri url) {
+            image.url = url;
+            return this;
+        }
+
+        public Image build() {
+            return image;
+        }
+    }
 }

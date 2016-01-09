@@ -25,11 +25,26 @@
 package com.txusballesteros.testing.internal.di;
 
 import com.txusballesteros.testing.Application;
+import com.txusballesteros.testing.data.api.internal.di.ApiModule;
+import com.txusballesteros.testing.data.cache.internal.di.CachesModule;
+import com.txusballesteros.testing.data.datasource.internal.di.DatasourcesModule;
+import com.txusballesteros.testing.data.internal.di.RepositoriesModule;
+import com.txusballesteros.testing.threading.JobExecutor;
+import com.txusballesteros.testing.threading.PostExecutionThread;
+import com.txusballesteros.testing.threading.ThreadExecutor;
+import com.txusballesteros.testing.threading.UIThread;
+
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 
-@Module
+@Module ( includes = {
+        RepositoriesModule.class,
+        DatasourcesModule.class,
+        CachesModule.class,
+        ApiModule.class
+})
 public class ApplicationModule {
     private final Application application;
 
@@ -40,5 +55,15 @@ public class ApplicationModule {
     @Provides
     Application provideApplication() {
         return application;
+    }
+
+    @Provides @Singleton
+    ThreadExecutor provideThreadExecutor(JobExecutor executor) {
+        return executor;
+    }
+
+    @Provides @Singleton
+    PostExecutionThread providePostExecutionThread() {
+        return UIThread.getInstance();
     }
 }

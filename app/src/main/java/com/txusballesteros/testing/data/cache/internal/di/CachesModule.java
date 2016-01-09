@@ -22,25 +22,27 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.internal.di;
+package com.txusballesteros.testing.data.cache.internal.di;
 
-import com.txusballesteros.testing.Application;
-import com.txusballesteros.testing.domain.repository.DashboardRepository;
-import com.txusballesteros.testing.threading.PostExecutionThread;
-import com.txusballesteros.testing.threading.ThreadExecutor;
+import com.txusballesteros.testing.data.cache.DashboardCache;
+import com.txusballesteros.testing.data.cache.DashboardMemoryCache;
+import com.txusballesteros.testing.data.cache.model.ImageCacheMapper;
+import com.txusballesteros.testing.data.cache.model.ImageCacheMapperImpl;
 
 import javax.inject.Singleton;
 
-import dagger.Component;
+import dagger.Module;
+import dagger.Provides;
 
-@Singleton
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
-    void inject(Application client);
+@Module
+public class CachesModule {
+    @Provides @Singleton
+    DashboardCache provideDashboardCache(DashboardMemoryCache cache) {
+        return cache;
+    }
 
-    Application getApplication();
-    ThreadExecutor getThreadExecutor();
-    PostExecutionThread getPostExecutionThread();
-
-    DashboardRepository getDashboardRepository();
+    @Provides
+    ImageCacheMapper provideImageCacheMapper(ImageCacheMapperImpl mapper) {
+        return mapper;
+    }
 }

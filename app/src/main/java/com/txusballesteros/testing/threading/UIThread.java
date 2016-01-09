@@ -22,25 +22,27 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.internal.di;
+package com.txusballesteros.testing.threading;
 
-import com.txusballesteros.testing.Application;
-import com.txusballesteros.testing.domain.repository.DashboardRepository;
-import com.txusballesteros.testing.threading.PostExecutionThread;
-import com.txusballesteros.testing.threading.ThreadExecutor;
+import android.os.Handler;
+import android.os.Looper;
 
-import javax.inject.Singleton;
+public class UIThread implements PostExecutionThread {
+    private static class LazyHolder {
+        private static final UIThread INSTANCE = new UIThread();
+    }
 
-import dagger.Component;
+    public static UIThread getInstance() {
+        return LazyHolder.INSTANCE;
+    }
 
-@Singleton
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
-    void inject(Application client);
+    private final Handler handler;
 
-    Application getApplication();
-    ThreadExecutor getThreadExecutor();
-    PostExecutionThread getPostExecutionThread();
+    private UIThread() {
+        this.handler = new Handler(Looper.getMainLooper());
+    }
 
-    DashboardRepository getDashboardRepository();
+    @Override public void post(Runnable runnable) {
+        handler.post(runnable);
+    }
 }

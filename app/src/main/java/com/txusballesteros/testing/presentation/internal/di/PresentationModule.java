@@ -22,25 +22,25 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.internal.di;
+package com.txusballesteros.testing.presentation.internal.di;
 
-import com.txusballesteros.testing.Application;
-import com.txusballesteros.testing.domain.repository.DashboardRepository;
-import com.txusballesteros.testing.threading.PostExecutionThread;
-import com.txusballesteros.testing.threading.ThreadExecutor;
+import com.txusballesteros.testing.presentation.MainPresenter;
+import com.txusballesteros.testing.presentation.MainPresenterImpl;
+import com.txusballesteros.testing.presentation.model.ImageModelMapper;
+import com.txusballesteros.testing.presentation.model.ImageModelMapperImpl;
 
-import javax.inject.Singleton;
+import dagger.Module;
+import dagger.Provides;
 
-import dagger.Component;
+@Module
+public class PresentationModule {
+    @Provides
+    MainPresenter provideMainPresenter(MainPresenterImpl presenter) {
+        return presenter;
+    }
 
-@Singleton
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
-    void inject(Application client);
-
-    Application getApplication();
-    ThreadExecutor getThreadExecutor();
-    PostExecutionThread getPostExecutionThread();
-
-    DashboardRepository getDashboardRepository();
+    @Provides
+    ImageModelMapper provideImageModelMapper(ImageModelMapperImpl mapper) {
+        return mapper;
+    }
 }

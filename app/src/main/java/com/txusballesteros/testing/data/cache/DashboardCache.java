@@ -22,25 +22,15 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.internal.di;
+package com.txusballesteros.testing.data.cache;
 
-import com.txusballesteros.testing.Application;
-import com.txusballesteros.testing.domain.repository.DashboardRepository;
-import com.txusballesteros.testing.threading.PostExecutionThread;
-import com.txusballesteros.testing.threading.ThreadExecutor;
+import com.txusballesteros.testing.data.cache.model.ImageCache;
 
-import javax.inject.Singleton;
+import java.util.List;
 
-import dagger.Component;
-
-@Singleton
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
-    void inject(Application client);
-
-    Application getApplication();
-    ThreadExecutor getThreadExecutor();
-    PostExecutionThread getPostExecutionThread();
-
-    DashboardRepository getDashboardRepository();
+public interface DashboardCache {
+    boolean isValid();
+    void cache(ImageCache value);
+    void cache(List<ImageCache> values);
+    List<ImageCache> get();
 }

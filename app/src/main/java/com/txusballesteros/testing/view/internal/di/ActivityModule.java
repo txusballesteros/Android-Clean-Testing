@@ -22,25 +22,32 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.internal.di;
+package com.txusballesteros.testing.view.internal.di;
 
-import com.txusballesteros.testing.Application;
-import com.txusballesteros.testing.domain.repository.DashboardRepository;
-import com.txusballesteros.testing.threading.PostExecutionThread;
-import com.txusballesteros.testing.threading.ThreadExecutor;
+import android.app.Activity;
 
-import javax.inject.Singleton;
+import com.txusballesteros.testing.domain.usecase.internal.di.UseCasesModule;
+import com.txusballesteros.testing.presentation.internal.di.PresentationModule;
 
-import dagger.Component;
+import dagger.Module;
+import dagger.Provides;
 
-@Singleton
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
-    void inject(Application client);
+@Module(
+        includes = {
+                ViewModule.class,
+                PresentationModule.class,
+                UseCasesModule.class
+        }
+)
+public class ActivityModule {
+    private final Activity activity;
 
-    Application getApplication();
-    ThreadExecutor getThreadExecutor();
-    PostExecutionThread getPostExecutionThread();
+    public ActivityModule(Activity activity) {
+        this.activity = activity;
+    }
 
-    DashboardRepository getDashboardRepository();
+    @Provides
+    Activity provideActivity() {
+        return activity;
+    }
 }

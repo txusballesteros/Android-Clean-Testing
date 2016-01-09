@@ -22,25 +22,25 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.internal.di;
+package com.txusballesteros.testing.data.api.internal.di;
 
-import com.txusballesteros.testing.Application;
-import com.txusballesteros.testing.domain.repository.DashboardRepository;
-import com.txusballesteros.testing.threading.PostExecutionThread;
-import com.txusballesteros.testing.threading.ThreadExecutor;
+import com.txusballesteros.testing.data.api.DashboardApi;
+import com.txusballesteros.testing.data.api.DashboardRetrofitApi;
+import com.txusballesteros.testing.data.api.model.ImageResponseMapper;
+import com.txusballesteros.testing.data.api.model.ImageResponseMapperImpl;
 
-import javax.inject.Singleton;
+import dagger.Module;
+import dagger.Provides;
 
-import dagger.Component;
+@Module
+public class ApiModule {
+    @Provides
+    DashboardApi provideDashboardApi(DashboardRetrofitApi api) {
+        return api;
+    }
 
-@Singleton
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
-    void inject(Application client);
-
-    Application getApplication();
-    ThreadExecutor getThreadExecutor();
-    PostExecutionThread getPostExecutionThread();
-
-    DashboardRepository getDashboardRepository();
+    @Provides
+    ImageResponseMapper provideImageResponseMapper(ImageResponseMapperImpl mapper) {
+        return mapper;
+    }
 }

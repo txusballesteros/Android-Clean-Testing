@@ -22,25 +22,24 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.internal.di;
+package com.txusballesteros.testing.data.api;
 
-import com.txusballesteros.testing.Application;
-import com.txusballesteros.testing.domain.repository.DashboardRepository;
-import com.txusballesteros.testing.threading.PostExecutionThread;
-import com.txusballesteros.testing.threading.ThreadExecutor;
+import retrofit2.GsonConverterFactory;
+import retrofit2.Retrofit;
 
-import javax.inject.Singleton;
+abstract class AbsRetrofitApi {
+    protected static final String API_KEY = "dc6zaTOxFJmzC";
+    private static final String BASE_URL = "http://api.giphy.com/";
+    private final Retrofit retrofit;
 
-import dagger.Component;
+    protected Retrofit getRetrofit() {
+        return retrofit;
+    }
 
-@Singleton
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
-    void inject(Application client);
-
-    Application getApplication();
-    ThreadExecutor getThreadExecutor();
-    PostExecutionThread getPostExecutionThread();
-
-    DashboardRepository getDashboardRepository();
+    public AbsRetrofitApi() {
+        retrofit = new Retrofit.Builder()
+                            .baseUrl(BASE_URL)
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+    }
 }

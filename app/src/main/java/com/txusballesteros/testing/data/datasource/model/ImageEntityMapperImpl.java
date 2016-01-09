@@ -22,25 +22,33 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.internal.di;
+package com.txusballesteros.testing.data.datasource.model;
 
-import com.txusballesteros.testing.Application;
-import com.txusballesteros.testing.domain.repository.DashboardRepository;
-import com.txusballesteros.testing.threading.PostExecutionThread;
-import com.txusballesteros.testing.threading.ThreadExecutor;
+import com.txusballesteros.testing.domain.model.Image;
 
-import javax.inject.Singleton;
+import java.util.ArrayList;
+import java.util.List;
 
-import dagger.Component;
+import javax.inject.Inject;
 
-@Singleton
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
-    void inject(Application client);
+public class ImageEntityMapperImpl implements ImageEntityMapper {
+    @Inject
+    public ImageEntityMapperImpl() { }
 
-    Application getApplication();
-    ThreadExecutor getThreadExecutor();
-    PostExecutionThread getPostExecutionThread();
+    @Override
+    public List<Image> map(List<ImageEntity> source) {
+        List<Image> result = new ArrayList<>(source.size());
+        for (int location = 0; location < source.size(); location++) {
+            final Image image = map(source.get(location));
+            result.add(image);
+        }
+        return result;
+    }
 
-    DashboardRepository getDashboardRepository();
+    @Override
+    public Image map(ImageEntity source) {
+        return new Image.Builder()
+                .setUrl(source.getUrl())
+                .build();
+    }
 }

@@ -22,25 +22,25 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.internal.di;
+package com.txusballesteros.testing.data.datasource.internal.di;
 
-import com.txusballesteros.testing.Application;
-import com.txusballesteros.testing.domain.repository.DashboardRepository;
-import com.txusballesteros.testing.threading.PostExecutionThread;
-import com.txusballesteros.testing.threading.ThreadExecutor;
+import com.txusballesteros.testing.data.datasource.DashboardCloudDatasource;
+import com.txusballesteros.testing.data.datasource.DashboardDatasource;
+import com.txusballesteros.testing.data.datasource.model.ImageEntityMapper;
+import com.txusballesteros.testing.data.datasource.model.ImageEntityMapperImpl;
 
-import javax.inject.Singleton;
+import dagger.Module;
+import dagger.Provides;
 
-import dagger.Component;
+@Module
+public class DatasourcesModule {
+    @Provides
+    DashboardDatasource provideDashboardDatasource(DashboardCloudDatasource datasource) {
+        return datasource;
+    }
 
-@Singleton
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
-    void inject(Application client);
-
-    Application getApplication();
-    ThreadExecutor getThreadExecutor();
-    PostExecutionThread getPostExecutionThread();
-
-    DashboardRepository getDashboardRepository();
+    @Provides
+    ImageEntityMapper provideImageEntityMapper(ImageEntityMapperImpl mapper) {
+        return mapper;
+    }
 }

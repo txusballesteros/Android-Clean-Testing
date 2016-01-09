@@ -22,25 +22,43 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.internal.di;
+package com.txusballesteros.testing.data.cache;
 
-import com.txusballesteros.testing.Application;
-import com.txusballesteros.testing.domain.repository.DashboardRepository;
-import com.txusballesteros.testing.threading.PostExecutionThread;
-import com.txusballesteros.testing.threading.ThreadExecutor;
+import com.txusballesteros.testing.data.cache.model.ImageCache;
 
-import javax.inject.Singleton;
+import java.util.ArrayList;
+import java.util.List;
 
-import dagger.Component;
+import javax.inject.Inject;
 
-@Singleton
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
-    void inject(Application client);
+public class DashboardMemoryCache extends AbsCache implements DashboardCache {
+    private final List<ImageCache> cache;
 
-    Application getApplication();
-    ThreadExecutor getThreadExecutor();
-    PostExecutionThread getPostExecutionThread();
+    @Inject
+    public DashboardMemoryCache() {
+        cache = new ArrayList<>();
+    }
 
-    DashboardRepository getDashboardRepository();
+    @Override
+    public boolean isValid() {
+        return isValidCache();
+    }
+
+    @Override
+    public void cache(ImageCache value) {
+        cache.add(value);
+        updateLastStorageTime();
+    }
+
+    @Override
+    public void cache(List<ImageCache> values) {
+        cache.clear();
+        cache.addAll(values);
+        updateLastStorageTime();
+    }
+
+    @Override
+    public List<ImageCache> get() {
+        return cache;
+    }
 }

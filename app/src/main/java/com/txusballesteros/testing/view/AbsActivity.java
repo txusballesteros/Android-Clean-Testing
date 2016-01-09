@@ -22,25 +22,27 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.internal.di;
+package com.txusballesteros.testing.view;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.txusballesteros.testing.Application;
-import com.txusballesteros.testing.domain.repository.DashboardRepository;
-import com.txusballesteros.testing.threading.PostExecutionThread;
-import com.txusballesteros.testing.threading.ThreadExecutor;
+import com.txusballesteros.testing.internal.di.ApplicationComponent;
 
-import javax.inject.Singleton;
+public abstract class AbsActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(onRequestLayout());
+        onInitializeInjection();
+    }
 
-import dagger.Component;
+    protected ApplicationComponent getApplicationComponent() {
+        return ((Application)getApplication()).getApplicationComponent();
+    }
 
-@Singleton
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
-    void inject(Application client);
+    abstract int onRequestLayout();
 
-    Application getApplication();
-    ThreadExecutor getThreadExecutor();
-    PostExecutionThread getPostExecutionThread();
-
-    DashboardRepository getDashboardRepository();
+    abstract void onInitializeInjection();
 }

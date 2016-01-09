@@ -24,14 +24,50 @@
  */
 package com.txusballesteros.testing.view;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import com.txusballesteros.testing.R;
+import com.txusballesteros.testing.presentation.MainPresenter;
+import com.txusballesteros.testing.presentation.model.ImageModel;
+import com.txusballesteros.testing.view.internal.di.ActivityModule;
+import com.txusballesteros.testing.view.internal.di.DaggerActivityComponent;
+import com.txusballesteros.testing.view.internal.di.ViewModule;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.List;
+
+import javax.inject.Inject;
+
+public class MainActivity extends AbsActivity implements MainPresenter.View {
+    @Inject MainPresenter presenter;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    int onRequestLayout() {
+        return R.layout.activity_main;
     }
+
+    @Override
+    void onInitializeInjection() {
+        DaggerActivityComponent.builder()
+                .applicationComponent(getApplicationComponent())
+                .activityModule(new ActivityModule(this))
+                .viewModule(new ViewModule(this))
+                .build()
+                .inject(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        presenter.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        presenter.onStop();
+    }
+
+    @Override
+    public void renderDashboard(List<ImageModel> images) { }
+
+    @Override
+    public void renderError() { }
 }

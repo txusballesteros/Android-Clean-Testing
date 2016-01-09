@@ -22,25 +22,25 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.internal.di;
+package com.txusballesteros.testing.data.cache;
 
-import com.txusballesteros.testing.Application;
-import com.txusballesteros.testing.domain.repository.DashboardRepository;
-import com.txusballesteros.testing.threading.PostExecutionThread;
-import com.txusballesteros.testing.threading.ThreadExecutor;
+import java.util.Calendar;
 
-import javax.inject.Singleton;
+public abstract class AbsCache {
+    private final static int MAXIMUM_VALID_TIME_IN_MS = (30 * 1000);
+    private long lastStorageTime = 0;
 
-import dagger.Component;
+    protected boolean isValidCache() {
+        boolean result = false;
+        if (lastStorageTime > 0) {
+            long currentTime = Calendar.getInstance().getTimeInMillis();
+            long timeDifference = currentTime - lastStorageTime;
+            result = timeDifference < MAXIMUM_VALID_TIME_IN_MS;
+        }
+        return result;
+    }
 
-@Singleton
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
-    void inject(Application client);
-
-    Application getApplication();
-    ThreadExecutor getThreadExecutor();
-    PostExecutionThread getPostExecutionThread();
-
-    DashboardRepository getDashboardRepository();
+    protected void updateLastStorageTime() {
+        lastStorageTime = Calendar.getInstance().getTimeInMillis();
+    }
 }

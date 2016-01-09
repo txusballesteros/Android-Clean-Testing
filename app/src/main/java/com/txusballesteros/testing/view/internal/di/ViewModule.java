@@ -22,25 +22,23 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.internal.di;
+package com.txusballesteros.testing.view.internal.di;
 
-import com.txusballesteros.testing.Application;
-import com.txusballesteros.testing.domain.repository.DashboardRepository;
-import com.txusballesteros.testing.threading.PostExecutionThread;
-import com.txusballesteros.testing.threading.ThreadExecutor;
+import com.txusballesteros.testing.presentation.MainPresenter;
 
-import javax.inject.Singleton;
+import dagger.Module;
+import dagger.Provides;
 
-import dagger.Component;
+@Module
+public class ViewModule {
+    private MainPresenter.View mainPresenterView;
 
-@Singleton
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
-    void inject(Application client);
+    public ViewModule(MainPresenter.View view) {
+        this.mainPresenterView = view;
+    }
 
-    Application getApplication();
-    ThreadExecutor getThreadExecutor();
-    PostExecutionThread getPostExecutionThread();
-
-    DashboardRepository getDashboardRepository();
+    @Provides
+    MainPresenter.View provideMainPresenterView() {
+        return mainPresenterView;
+    }
 }
