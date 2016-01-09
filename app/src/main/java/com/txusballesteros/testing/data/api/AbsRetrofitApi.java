@@ -24,22 +24,6 @@
  */
 package com.txusballesteros.testing.data.api;
 
-import retrofit2.GsonConverterFactory;
-import retrofit2.Retrofit;
-
 abstract class AbsRetrofitApi {
     protected static final String API_KEY = "dc6zaTOxFJmzC";
-    private static final String BASE_URL = "http://api.giphy.com/";
-    private final Retrofit retrofit;
-
-    protected Retrofit getRetrofit() {
-        return retrofit;
-    }
-
-    public AbsRetrofitApi() {
-        retrofit = new Retrofit.Builder()
-                            .baseUrl(BASE_URL)
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-    }
 }

@@ -30,17 +30,31 @@ import android.support.v7.app.AppCompatActivity;
 import com.txusballesteros.testing.Application;
 import com.txusballesteros.testing.internal.di.ApplicationComponent;
 
+import butterknife.ButterKnife;
+
 public abstract class AbsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(onRequestLayout());
-        onInitializeInjection();
+        initializeInjection();
+        initializeViewsInjection();
     }
 
     protected ApplicationComponent getApplicationComponent() {
         return ((Application)getApplication()).getApplicationComponent();
     }
+
+    private void initializeInjection() {
+        onInitializeInjection();
+    }
+
+    private void initializeViewsInjection() {
+        ButterKnife.bind(this);
+        onViewReady();
+    }
+
+    abstract void onViewReady();
 
     abstract int onRequestLayout();
 

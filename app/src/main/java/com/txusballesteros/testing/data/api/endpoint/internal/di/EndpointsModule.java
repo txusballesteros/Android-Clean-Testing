@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+/*
  * Copyright Txus Ballesteros 2016 (@txusballesteros)
  *
  * This file is part of some open source application.
@@ -22,15 +21,31 @@
  * under the License.
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
--->
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+ */
+package com.txusballesteros.testing.data.api.endpoint.internal.di;
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+import com.txusballesteros.testing.data.api.endpoint.DashboardEndpoint;
 
-</RelativeLayout>
+import javax.inject.Singleton;
+
+import dagger.Module;
+import dagger.Provides;
+import retrofit2.GsonConverterFactory;
+import retrofit2.Retrofit;
+
+@Module
+public class EndpointsModule {
+    private static final String BASE_URL = "http://api.giphy.com/";
+
+    @Provides @Singleton
+    DashboardEndpoint provideDashboardEndpoint() {
+        return getRetrofitBuilder().create(DashboardEndpoint.class);
+    }
+
+    private Retrofit getRetrofitBuilder() {
+        return new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+    }
+}

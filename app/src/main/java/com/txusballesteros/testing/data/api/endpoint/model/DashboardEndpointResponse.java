@@ -25,5 +25,6 @@
 package com.txusballesteros.testing.data.api.endpoint.model;
 
 public class DashboardEndpointResponse {
+    public String id;
     public String embed_url;
 }

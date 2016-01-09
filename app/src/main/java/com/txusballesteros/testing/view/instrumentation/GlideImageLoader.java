@@ -47,7 +47,6 @@ public class GlideImageLoader implements ImageLoader {
                 .load(imageUrl)
                 .asGif()
                 .placeholder(R.drawable.ic_cloud_download_48dp)
-                .crossFade()
                 .into(imageView);
     }
 }

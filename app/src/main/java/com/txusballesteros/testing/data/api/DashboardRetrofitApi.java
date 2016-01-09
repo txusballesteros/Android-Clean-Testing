@@ -39,10 +39,12 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 public class DashboardRetrofitApi extends AbsRetrofitApi implements DashboardApi {
+    private final DashboardEndpoint endpoint;
     private final ImageResponseMapper mapper;
 
     @Inject
-    public DashboardRetrofitApi(ImageResponseMapper mapper) {
+    public DashboardRetrofitApi(DashboardEndpoint endpoint, ImageResponseMapper mapper) {
+        this.endpoint = endpoint;
         this.mapper = mapper;
     }
 
@@ -50,8 +52,7 @@ public class DashboardRetrofitApi extends AbsRetrofitApi implements DashboardApi
     public List<ImageResponse> getDashboard() {
         List<ImageResponse> result = new ArrayList<>();
         try {
-            DashboardEndpoint endpoint = getRetrofit().create(DashboardEndpoint.class);
-            Call<DashboardListEndpointResponse> apiCaller = endpoint.getDashboard(API_KEY);
+            final Call<DashboardListEndpointResponse> apiCaller = endpoint.getDashboard(API_KEY);
             final Response<DashboardListEndpointResponse> response = apiCaller.execute();
             final DashboardListEndpointResponse images = response.body();
             result = mapper.map(images);

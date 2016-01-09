@@ -24,9 +24,13 @@
  */
 package com.txusballesteros.testing.view;
 
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+
 import com.txusballesteros.testing.R;
 import com.txusballesteros.testing.presentation.MainPresenter;
 import com.txusballesteros.testing.presentation.model.ImageModel;
+import com.txusballesteros.testing.view.instrumentation.ImageLoader;
 import com.txusballesteros.testing.view.internal.di.ActivityModule;
 import com.txusballesteros.testing.view.internal.di.DaggerActivityComponent;
 import com.txusballesteros.testing.view.internal.di.ViewModule;
@@ -35,12 +39,29 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.Bind;
+
 public class MainActivity extends AbsActivity implements MainPresenter.View {
     @Inject MainPresenter presenter;
+    @Inject ImageLoader imageLoader;
+    @Bind(R.id.list) RecyclerView listView;
+    private DashboardListAdapter listAdapter;
 
     @Override
     int onRequestLayout() {
         return R.layout.activity_main;
+    }
+
+    @Override
+    void onViewReady() {
+        initializeList();
+    }
+
+    private void initializeList() {
+        listAdapter = new DashboardListAdapter(this, imageLoader);
+        listView.setLayoutManager(new GridLayoutManager(this, 2));
+        listView.setHasFixedSize(true);
+        listView.setAdapter(listAdapter);
     }
 
     @Override
@@ -66,7 +87,9 @@ public class MainActivity extends AbsActivity implements MainPresenter.View {
     }
 
     @Override
-    public void renderDashboard(List<ImageModel> images) { }
+    public void renderDashboard(List<ImageModel> images) {
+        listAdapter.addAll(images);
+    }
 
     @Override
     public void renderError() { }

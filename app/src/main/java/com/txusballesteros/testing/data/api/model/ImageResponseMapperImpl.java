@@ -69,7 +69,7 @@ public class ImageResponseMapperImpl implements ImageResponseMapper {
     @Override
     public ImageResponse map(DashboardEndpointResponse source) {
         return new ImageResponse.Builder()
-                .setUrl(Uri.parse(source.embed_url))
+                .setUrl(Uri.parse(String.format("http://i.giphy.com/%s.gif", source.id)))
                 .build();
     }
 }

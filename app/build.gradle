@@ -60,6 +60,8 @@ dependencies {
     compile mobileDependencies.retrofit
     compile mobileDependencies.gsonConverter
     compile mobileDependencies.glide
+    compile mobileDependencies.recyclerView
+    compile mobileDependencies.butterKnife
     testCompile mobileDependencies.junit
     testCompile mobileDependencies.mockito
 }

@@ -25,6 +25,7 @@
 package com.txusballesteros.testing.internal.di;
 
 import com.txusballesteros.testing.Application;
+import com.txusballesteros.testing.data.api.endpoint.internal.di.EndpointsModule;
 import com.txusballesteros.testing.data.api.internal.di.ApiModule;
 import com.txusballesteros.testing.data.cache.internal.di.CachesModule;
 import com.txusballesteros.testing.data.datasource.internal.di.DatasourcesModule;
@@ -45,7 +46,8 @@ import dagger.Provides;
         RepositoriesModule.class,
         DatasourcesModule.class,
         CachesModule.class,
-        ApiModule.class
+        ApiModule.class,
+        EndpointsModule.class
 })
 public class ApplicationModule {
     private final Application application;
