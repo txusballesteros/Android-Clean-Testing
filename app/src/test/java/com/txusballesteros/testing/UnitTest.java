@@ -22,33 +22,24 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.data.cache.model;
+package com.txusballesteros.testing;
 
-import android.net.Uri;
+import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+import org.mockito.MockitoAnnotations;
 
-public class ImageCache {
-    private Uri url;
-
-    private ImageCache() { }
-
-    public Uri getUrl() {
-        return url;
+@RunWith(JUnit4.class)
+public abstract class UnitTest {
+    @Before
+    public final  void Setup() {
+        initializeMocks();
+        onSetup();
     }
 
-    public static class Builder {
-        private ImageCache image;
-
-        public Builder() {
-            this.image = new ImageCache();
-        }
-
-        public Builder setUrl(Uri url) {
-            image.url = url;
-            return this;
-        }
-
-        public ImageCache build() {
-            return image;
-        }
+    private void initializeMocks() {
+        MockitoAnnotations.initMocks(this);
     }
+
+    protected abstract void onSetup();
 }

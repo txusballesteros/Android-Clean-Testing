@@ -24,7 +24,6 @@
  */
 package com.txusballesteros.testing.data.datasource.model;
 
-import com.txusballesteros.testing.data.api.model.ImageResponse;
 import com.txusballesteros.testing.domain.model.Image;
 
 import java.util.List;

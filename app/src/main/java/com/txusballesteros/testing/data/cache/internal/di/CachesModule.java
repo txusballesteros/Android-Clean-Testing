@@ -26,8 +26,6 @@ package com.txusballesteros.testing.data.cache.internal.di;
 
 import com.txusballesteros.testing.data.cache.DashboardCache;
 import com.txusballesteros.testing.data.cache.DashboardMemoryCache;
-import com.txusballesteros.testing.data.cache.model.ImageCacheMapper;
-import com.txusballesteros.testing.data.cache.model.ImageCacheMapperImpl;
 
 import javax.inject.Singleton;
 
@@ -39,10 +37,5 @@ public class CachesModule {
     @Provides @Singleton
     DashboardCache provideDashboardCache(DashboardMemoryCache cache) {
         return cache;
-    }
-
-    @Provides
-    ImageCacheMapper provideImageCacheMapper(ImageCacheMapperImpl mapper) {
-        return mapper;
     }
 }

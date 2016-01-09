@@ -24,7 +24,8 @@
  */
 package com.txusballesteros.testing.data.cache;
 
-import com.txusballesteros.testing.data.cache.model.ImageCache;
+
+import com.txusballesteros.testing.data.datasource.model.ImageEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,11 +33,11 @@ import java.util.List;
 import javax.inject.Inject;
 
 public class DashboardMemoryCache extends AbsCache implements DashboardCache {
-    private final List<ImageCache> cache;
+    private final List<ImageEntity> cache;
 
     @Inject
     public DashboardMemoryCache() {
-        cache = new ArrayList<>();
+        this.cache = new ArrayList<>();
     }
 
     @Override
@@ -45,20 +46,14 @@ public class DashboardMemoryCache extends AbsCache implements DashboardCache {
     }
 
     @Override
-    public void cache(ImageCache value) {
-        cache.add(value);
-        updateLastStorageTime();
-    }
-
-    @Override
-    public void cache(List<ImageCache> values) {
+    public void cache(List<ImageEntity> values) {
         cache.clear();
         cache.addAll(values);
         updateLastStorageTime();
     }
 
     @Override
-    public List<ImageCache> get() {
+    public List<ImageEntity> get() {
         return cache;
     }
 }

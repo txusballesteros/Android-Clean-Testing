@@ -24,13 +24,12 @@
  */
 package com.txusballesteros.testing.data.cache;
 
-import com.txusballesteros.testing.data.cache.model.ImageCache;
+import com.txusballesteros.testing.data.datasource.model.ImageEntity;
 
 import java.util.List;
 
 public interface DashboardCache {
     boolean isValid();
-    void cache(ImageCache value);
-    void cache(List<ImageCache> values);
-    List<ImageCache> get();
+    void cache(List<ImageEntity> values);
+    List<ImageEntity> get();
 }

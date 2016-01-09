@@ -25,8 +25,6 @@
 package com.txusballesteros.testing.data;
 
 import com.txusballesteros.testing.data.cache.DashboardCache;
-import com.txusballesteros.testing.data.cache.model.ImageCache;
-import com.txusballesteros.testing.data.cache.model.ImageCacheMapper;
 import com.txusballesteros.testing.data.datasource.DashboardDatasource;
 import com.txusballesteros.testing.data.datasource.model.ImageEntity;
 import com.txusballesteros.testing.data.datasource.model.ImageEntityMapper;
@@ -40,18 +38,15 @@ import javax.inject.Inject;
 public class DashboardRepositoryImpl extends AbsRepository implements DashboardRepository {
     private final DashboardDatasource datasource;
     private final DashboardCache cache;
-    private final ImageEntityMapper entityMapper;
-    private final ImageCacheMapper cacheMapper;
+    private final ImageEntityMapper mapper;
 
     @Inject
     public DashboardRepositoryImpl(DashboardDatasource datasource,
                                    DashboardCache cache,
-                                   ImageEntityMapper entityMapper,
-                                   ImageCacheMapper cacheMapper) {
+                                   ImageEntityMapper mapper) {
         this.datasource = datasource;
         this.cache = cache;
-        this.entityMapper = entityMapper;
-        this.cacheMapper = cacheMapper;
+        this.mapper = mapper;
     }
 
     @Override
@@ -59,11 +54,11 @@ public class DashboardRepositoryImpl extends AbsRepository implements DashboardR
         try {
             List<Image> result;
             if (cache.isValid()) {
-                final List<ImageCache> images = cache.get();
-                result = cacheMapper.map(images);
+                result = mapper.map(cache.get());
             } else {
                 final List<ImageEntity> images = datasource.getDashboard();
-                result = entityMapper.map(images);
+                cache.cache(images);
+                result = mapper.map(images);
             }
             callback.onSuccess(result);
         } catch (Exception error) {
