@@ -1,4 +1,4 @@
-Android Testing Example Project
+Android Clean & Testing Example
 ===============================
 
 Here you have a full example project that shows how you can implement different tests types into your android projects.
