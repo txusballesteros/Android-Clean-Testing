@@ -1,0 +1,61 @@
+/*
+ * Copyright Txus Ballesteros 2016 (@txusballesteros)
+ *
+ * This file is part of some open source application.
+ *
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ *
+ * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
+ */
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+ext {
+    //Android
+    androidApplicationId = 'com.txusballesteros.testing'
+    androidVersionCode = 1
+    androidVersionName = "1.0"
+    androidBuildToolsVersion = "23.0.2"
+    androidMinSdkVersion = 18
+    androidWearMinSdkVersion = 21
+    androidTargetSdkVersion = 23
+    androidCompileSdkVersion = 23
+
+    //Libraries
+    javaxAnnotationVersion = '10.0-b28'
+    daggerVersion = '2.0.1'
+    androidSupportVersion = '23.1.1'
+    junitVersion = '4.12'
+    mockitoVersion = '1.10.19'
+    retrofitVersion = '2.0.0-beta3'
+    gsonConverterVersion = '2.0.0-beta3'
+
+    mobileDependencies = [
+        javaxAnnotation:"org.glassfish:javax.annotation:${javaxAnnotationVersion}",
+        daggerCompiler: "com.google.dagger:dagger-compiler:${daggerVersion}",
+        dagger:         "com.google.dagger:dagger:${daggerVersion}",
+        appcompat:      "com.android.support:appcompat-v7:${androidSupportVersion}",
+        retrofit:       "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+        gsonConverter:  "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+        junit:          "junit:junit:${junitVersion}",
+        mockito:        "org.mockito:mockito-all:${mockitoVersion}",
+    ]
+}
