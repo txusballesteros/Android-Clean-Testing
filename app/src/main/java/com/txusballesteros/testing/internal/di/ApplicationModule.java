@@ -33,6 +33,7 @@ import com.txusballesteros.testing.threading.JobExecutor;
 import com.txusballesteros.testing.threading.PostExecutionThread;
 import com.txusballesteros.testing.threading.ThreadExecutor;
 import com.txusballesteros.testing.threading.UIThread;
+import com.txusballesteros.testing.view.instrumentation.internal.di.InstrumentationModule;
 
 import javax.inject.Singleton;
 
@@ -40,6 +41,7 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module ( includes = {
+        InstrumentationModule.class,
         RepositoriesModule.class,
         DatasourcesModule.class,
         CachesModule.class,

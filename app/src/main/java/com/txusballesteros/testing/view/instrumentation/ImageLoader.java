@@ -22,26 +22,11 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.internal.di;
+package com.txusballesteros.testing.view.instrumentation;
 
-import com.txusballesteros.testing.Application;
-import com.txusballesteros.testing.domain.repository.DashboardRepository;
-import com.txusballesteros.testing.threading.PostExecutionThread;
-import com.txusballesteros.testing.threading.ThreadExecutor;
-import com.txusballesteros.testing.view.instrumentation.ImageLoader;
+import android.net.Uri;
+import android.widget.ImageView;
 
-import javax.inject.Singleton;
-
-import dagger.Component;
-
-@Singleton
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
-    void inject(Application client);
-
-    Application getApplication();
-    ThreadExecutor getThreadExecutor();
-    PostExecutionThread getPostExecutionThread();
-    ImageLoader getImageLoader();
-    DashboardRepository getDashboardRepository();
+public interface ImageLoader {
+    void loadImageAsGif(Uri imageUrl, ImageView imageView);
 }

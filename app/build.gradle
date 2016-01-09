@@ -59,6 +59,7 @@ dependencies {
     compile mobileDependencies.appcompat
     compile mobileDependencies.retrofit
     compile mobileDependencies.gsonConverter
+    compile mobileDependencies.glide
     testCompile mobileDependencies.junit
     testCompile mobileDependencies.mockito
 }

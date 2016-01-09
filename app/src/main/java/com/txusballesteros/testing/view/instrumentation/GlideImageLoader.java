@@ -22,26 +22,32 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.internal.di;
+package com.txusballesteros.testing.view.instrumentation;
 
+import android.net.Uri;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 import com.txusballesteros.testing.Application;
-import com.txusballesteros.testing.domain.repository.DashboardRepository;
-import com.txusballesteros.testing.threading.PostExecutionThread;
-import com.txusballesteros.testing.threading.ThreadExecutor;
-import com.txusballesteros.testing.view.instrumentation.ImageLoader;
+import com.txusballesteros.testing.R;
 
-import javax.inject.Singleton;
+import javax.inject.Inject;
 
-import dagger.Component;
+public class GlideImageLoader implements ImageLoader {
+    private final Application application;
 
-@Singleton
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
-    void inject(Application client);
+    @Inject
+    public GlideImageLoader(Application application) {
+        this.application = application;
+    }
 
-    Application getApplication();
-    ThreadExecutor getThreadExecutor();
-    PostExecutionThread getPostExecutionThread();
-    ImageLoader getImageLoader();
-    DashboardRepository getDashboardRepository();
+    @Override
+    public void loadImageAsGif(Uri imageUrl, ImageView imageView) {
+        Glide.with(application)
+                .load(imageUrl)
+                .asGif()
+                .placeholder(R.drawable.ic_cloud_download_48dp)
+                .crossFade()
+                .into(imageView);
+    }
 }

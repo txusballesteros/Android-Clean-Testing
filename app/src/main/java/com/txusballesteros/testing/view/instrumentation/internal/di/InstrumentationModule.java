@@ -22,26 +22,20 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.internal.di;
+package com.txusballesteros.testing.view.instrumentation.internal.di;
 
-import com.txusballesteros.testing.Application;
-import com.txusballesteros.testing.domain.repository.DashboardRepository;
-import com.txusballesteros.testing.threading.PostExecutionThread;
-import com.txusballesteros.testing.threading.ThreadExecutor;
+import com.txusballesteros.testing.view.instrumentation.GlideImageLoader;
 import com.txusballesteros.testing.view.instrumentation.ImageLoader;
 
 import javax.inject.Singleton;
 
-import dagger.Component;
+import dagger.Module;
+import dagger.Provides;
 
-@Singleton
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
-    void inject(Application client);
-
-    Application getApplication();
-    ThreadExecutor getThreadExecutor();
-    PostExecutionThread getPostExecutionThread();
-    ImageLoader getImageLoader();
-    DashboardRepository getDashboardRepository();
+@Module
+public class InstrumentationModule {
+    @Provides @Singleton
+    ImageLoader provideImageLoader(GlideImageLoader imageLoader) {
+        return imageLoader;
+    }
 }

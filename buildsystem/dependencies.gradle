@@ -47,6 +47,7 @@ ext {
     mockitoVersion = '1.10.19'
     retrofitVersion = '2.0.0-beta3'
     gsonConverterVersion = '2.0.0-beta3'
+    glideVersion = '3.6.1'
 
     mobileDependencies = [
         javaxAnnotation:"org.glassfish:javax.annotation:${javaxAnnotationVersion}",
@@ -57,5 +58,6 @@ ext {
         gsonConverter:  "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
         junit:          "junit:junit:${junitVersion}",
         mockito:        "org.mockito:mockito-all:${mockitoVersion}",
+        glide:          "com.github.bumptech.glide:glide:${glideVersion}",
     ]
 }
