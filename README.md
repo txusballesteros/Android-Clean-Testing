@@ -1,7 +1,7 @@
 Android Clean & Testing Example
 ===============================
 
-Here you have a full example project that shows how you can implement different tests types into your android projects.
+Here you have a full example project that shows how you can implement different tests types into your android projects. My goal with this repository is show the way to have a isolated architecture and how you can mock and test all the layers or components of the project.
 
 You will can see next kind of tests.
 
