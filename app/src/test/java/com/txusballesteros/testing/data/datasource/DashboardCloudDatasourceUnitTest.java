@@ -24,28 +24,38 @@
  */
 package com.txusballesteros.testing.data.datasource;
 
+import com.txusballesteros.testing.UnitTest;
 import com.txusballesteros.testing.data.api.DashboardApi;
 import com.txusballesteros.testing.data.api.model.ImageResponse;
 import com.txusballesteros.testing.data.api.model.ImageResponseMapper;
-import com.txusballesteros.testing.data.datasource.model.ImageEntity;
+
+import org.junit.Test;
+import org.mockito.Mock;
 
 import java.util.List;
 
-import javax.inject.Inject;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.verify;
 
-public class DashboardCloudDatasource extends AbsDatasource implements DashboardDatasource {
-    private final DashboardApi api;
-    private final ImageResponseMapper mapper;
-
-    @Inject
-    public DashboardCloudDatasource(DashboardApi api, ImageResponseMapper mapper) {
-        this.api = api;
-        this.mapper = mapper;
-    }
+public class DashboardCloudDatasourceUnitTest extends UnitTest {
+    @Mock DashboardApi dashboardApiMock;
+    @Mock ImageResponseMapper imageResponseMapperMock;
+    @Mock List<ImageResponse> apiRessultMock;
+    private DashboardDatasource datasource;
 
     @Override
-    public List<ImageEntity> getDashboard() {
-        final List<ImageResponse> images = api.getDashboard();
-        return mapper.map(images);
+    protected void onSetup() {
+        datasource = new DashboardCloudDatasource(dashboardApiMock, imageResponseMapperMock);
+    }
+
+    @Test
+    public void shouldGetDashboard() {
+        doReturn(apiRessultMock).when(dashboardApiMock).getDashboard();
+
+        datasource.getDashboard();
+
+        verify(dashboardApiMock).getDashboard();
+        verify(imageResponseMapperMock).map(eq(apiRessultMock));
     }
 }
