@@ -7,9 +7,9 @@ env:
 
 android:
   components:
+    - tools
     - build-tools-23.0.2
     - $ANDROID_TARGET
-    - extra-google-google_play_services
     - extra-google-m2repository
     - extra-android-m2repository
 
