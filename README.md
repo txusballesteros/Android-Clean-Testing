@@ -1,9 +1,9 @@
 Android Clean & Testing Example
 ===============================
 
-Here you have a full example project that shows how you can implement different tests types into your android projects. My goal with this repository is show the way to have a isolated architecture and how you can mock and test all the layers or components of the project.
+Here you have a full example project that shows how you can implement different tests types into your android projects. My goal with this repository is to show the way to have a isolated architecture and how you can mock and test all the layers or components of the project.
 
-You will can see next kind of tests.
+You will see the following kind of tests.
 
 * Unit Tests
 * Integration Tests
@@ -13,7 +13,7 @@ By the way, also I want to show a full example about my personal approach of [Cl
  
 ## Acknowledgement
 
-* To [Fernando Cejas](https://github.com/android10), for his help on Clean Architecture and for this dependencies configuration for gradle.
+* To [Fernando Cejas](https://github.com/android10), for his help on Clean Architecture and for the configuration of the dependencies for gradle.
 * To [Pedro Vicente Gomez](https://github.com/pedrovgs), for his help on Testing and Dagger things.
 * To all Android Developers of Spanish Community for their help every time. 
     
