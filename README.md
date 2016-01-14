@@ -16,6 +16,10 @@ By the way, also I want to show a full example about my personal approach of [Cl
 * To [Fernando Cejas](https://github.com/android10), for his help on Clean Architecture and for the configuration of the dependencies for gradle.
 * To [Pedro Vicente Gomez](https://github.com/pedrovgs), for his help on Testing and Dagger things.
 * To all Android Developers of Spanish Community for their help every time. 
+
+## Social
+
+[![](assets/twitter.png)](https://twitter.com/txusballesteros) [![](assets/google_plus.png)](https://plus.google.com/+txusballesteros) [![](assets/linkedin.png)](https://www.linkedin.com/in/txusballesteros)
     
 ## License
 
