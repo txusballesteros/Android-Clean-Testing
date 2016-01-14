@@ -45,6 +45,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_7
     }
 
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
