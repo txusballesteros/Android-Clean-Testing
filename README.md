@@ -19,7 +19,7 @@ By the way, also I want to show a full example about my personal approach of [Cl
 
 ## Social
 
-[![](assets/twitter.png)](https://twitter.com/txusballesteros) [![](assets/google_plus.png)](https://plus.google.com/+txusballesteros) [![](assets/linkedin.png)](https://www.linkedin.com/in/txusballesteros)
+[![](assets/twitter.svg)](https://twitter.com/txusballesteros) [![](assets/google_plus.png)](https://plus.google.com/+txusballesteros) [![](assets/linkedin.png)](https://www.linkedin.com/in/txusballesteros)
     
 ## License
 
