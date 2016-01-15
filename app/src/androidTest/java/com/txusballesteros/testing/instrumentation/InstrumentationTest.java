@@ -22,10 +22,19 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.view.internal.di;
+package com.txusballesteros.testing.instrumentation;
 
-import android.app.Activity;
+import android.support.test.runner.AndroidJUnit4;
 
-public interface ActivityModule {
-    Activity provideActivity();
+import org.junit.Before;
+import org.junit.runner.RunWith;
+
+@RunWith(AndroidJUnit4.class)
+public abstract class InstrumentationTest {
+    @Before
+    public final void setup() {
+        onSetup();
+    }
+
+    protected void onSetup() { }
 }

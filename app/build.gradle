@@ -37,7 +37,7 @@ android {
         targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
         versionCode globalConfiguration.getAt("androidVersionCode")
         versionName globalConfiguration.getAt("androidVersionName")
-        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+        testInstrumentationRunner 'com.txusballesteros.testing.AndroidTestRunner'
     }
 
     compileOptions {
@@ -75,6 +75,9 @@ dependencies {
     androidTestCompile mobileDependencies.mockito
     androidTestCompile mobileDependencies.dexmaker
     androidTestCompile mobileDependencies.dexmaker_mockito
+    androidTestCompile (mobileDependencies.espressoCore) {
+        exclude module: 'support-annotations'
+    }
     androidTestCompile (mobileDependencies.androidTestRunner) {
         exclude module: 'support-annotations'
     }

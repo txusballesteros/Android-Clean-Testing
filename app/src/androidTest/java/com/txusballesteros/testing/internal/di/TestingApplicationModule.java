@@ -41,8 +41,33 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-public interface ApplicationModule {
-    Application provideApplication();
-    ThreadExecutor provideThreadExecutor(JobExecutor executor);
-    PostExecutionThread providePostExecutionThread();
+@Module ( includes = {
+        InstrumentationModule.class,
+        RepositoriesModule.class,
+        DatasourcesModule.class,
+        CachesModule.class,
+        ApiModule.class,
+        EndpointsModule.class
+})
+public class TestingApplicationModule implements ApplicationModule {
+    private final Application application;
+
+    public TestingApplicationModule(Application application) {
+        this.application = application;
+    }
+
+    @Override @Provides
+    public Application provideApplication() {
+        return application;
+    }
+
+    @Override @Provides @Singleton
+    public ThreadExecutor provideThreadExecutor(JobExecutor executor) {
+        return executor;
+    }
+
+    @Override @Provides @Singleton
+    public PostExecutionThread providePostExecutionThread() {
+        return UIThread.getInstance();
+    }
 }

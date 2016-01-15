@@ -22,16 +22,19 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.internal.di;
+package com.txusballesteros.testing.integration;
 
-import com.txusballesteros.testing.api.DashboardApiIntegrationTest;
+import android.support.test.runner.AndroidJUnit4;
 
-import javax.inject.Singleton;
+import org.junit.Before;
+import org.junit.runner.RunWith;
 
-import dagger.Component;
+@RunWith(AndroidJUnit4.class)
+public abstract class IntegrationTest {
+    @Before
+    public final void setup() {
+        onInitializeInjection();
+    }
 
-@Singleton
-@Component( modules = IntegrationTestModule.class )
-public interface IntegrationTestComponent {
-    void inject(DashboardApiIntegrationTest test);
+    protected abstract void onInitializeInjection();
 }

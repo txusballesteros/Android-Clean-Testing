@@ -22,10 +22,16 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.view.internal.di;
+package com.txusballesteros.testing;
 
-import android.app.Activity;
+import android.content.Context;
+import android.support.test.runner.AndroidJUnitRunner;
 
-public interface ActivityModule {
-    Activity provideActivity();
+public class AndroidTestRunner extends AndroidJUnitRunner {
+    @Override
+    public android.app.Application newApplication(ClassLoader classLoader,
+                                                  String className, Context context)
+                     throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+        return super.newApplication(classLoader, TestingApplication.class.getName(), context);
+    }
 }

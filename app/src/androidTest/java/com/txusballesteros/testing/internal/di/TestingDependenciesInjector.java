@@ -24,25 +24,26 @@
  */
 package com.txusballesteros.testing.internal.di;
 
+import android.app.Activity;
+
 import com.txusballesteros.testing.Application;
-import com.txusballesteros.testing.data.api.endpoint.internal.di.EndpointsModule;
-import com.txusballesteros.testing.data.api.internal.di.ApiModule;
-import com.txusballesteros.testing.data.cache.internal.di.CachesModule;
-import com.txusballesteros.testing.data.datasource.internal.di.DatasourcesModule;
-import com.txusballesteros.testing.data.internal.di.RepositoriesModule;
-import com.txusballesteros.testing.threading.JobExecutor;
-import com.txusballesteros.testing.threading.PostExecutionThread;
-import com.txusballesteros.testing.threading.ThreadExecutor;
-import com.txusballesteros.testing.threading.UIThread;
-import com.txusballesteros.testing.view.instrumentation.internal.di.InstrumentationModule;
+import com.txusballesteros.testing.instrumentation.view.internal.di.DaggerTestingActivityComponent;
+import com.txusballesteros.testing.instrumentation.view.internal.di.TestingActivityModule;
+import com.txusballesteros.testing.view.MainActivity;
+import com.txusballesteros.testing.view.internal.di.ViewModule;
 
-import javax.inject.Singleton;
+public class TestingDependenciesInjector implements DependenciesInjector {
+    @Override
+    public void inject(MainActivity client) {
+        DaggerTestingActivityComponent.builder()
+                .applicationComponent(getApplicationComponent(client))
+                .testingActivityModule(new TestingActivityModule(client))
+                .viewModule(new ViewModule(client))
+                .build()
+                .inject(client);
+    }
 
-import dagger.Module;
-import dagger.Provides;
-
-public interface ApplicationModule {
-    Application provideApplication();
-    ThreadExecutor provideThreadExecutor(JobExecutor executor);
-    PostExecutionThread providePostExecutionThread();
+    private ApplicationComponent getApplicationComponent(Activity activity) {
+        return ((Application)activity.getApplication()).getApplicationComponent();
+    }
 }

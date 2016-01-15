@@ -22,34 +22,13 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing;
+package com.txusballesteros.testing.view.internal.di;
 
 import com.txusballesteros.testing.internal.di.ApplicationComponent;
-import com.txusballesteros.testing.internal.di.DaggerRuntimeApplicationComponent;
-import com.txusballesteros.testing.internal.di.DependenciesInjector;
-import com.txusballesteros.testing.internal.di.RuntimeApplicationModule;
-import com.txusballesteros.testing.internal.di.RuntimeDependenciesInjector;
+import com.txusballesteros.testing.internal.di.scopes.PerActivity;
 
-public class Application extends android.app.Application {
-    private ApplicationComponent applicationComponent;
+import dagger.Component;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        initializeInjection();
-    }
-
-    private void initializeInjection() {
-        this.applicationComponent = DaggerRuntimeApplicationComponent.builder()
-                                    .runtimeApplicationModule(new RuntimeApplicationModule(this))
-                                    .build();
-    }
-
-    public ApplicationComponent getApplicationComponent() {
-        return applicationComponent;
-    }
-
-    public DependenciesInjector getDependenciesInjector() {
-        return new RuntimeDependenciesInjector();
-    }
-}
+@PerActivity
+@Component(dependencies = ApplicationComponent.class, modules = RuntimeActivityModule.class)
+public interface RuntimeActivityComponent extends ActivityComponent { }

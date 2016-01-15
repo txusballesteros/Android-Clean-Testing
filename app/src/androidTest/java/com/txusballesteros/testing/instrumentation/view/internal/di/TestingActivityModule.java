@@ -22,27 +22,32 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.internal.di;
+package com.txusballesteros.testing.instrumentation.view.internal.di;
 
-import com.txusballesteros.testing.Application;
-import com.txusballesteros.testing.data.api.endpoint.internal.di.EndpointsModule;
-import com.txusballesteros.testing.data.api.internal.di.ApiModule;
-import com.txusballesteros.testing.data.cache.internal.di.CachesModule;
-import com.txusballesteros.testing.data.datasource.internal.di.DatasourcesModule;
-import com.txusballesteros.testing.data.internal.di.RepositoriesModule;
-import com.txusballesteros.testing.threading.JobExecutor;
-import com.txusballesteros.testing.threading.PostExecutionThread;
-import com.txusballesteros.testing.threading.ThreadExecutor;
-import com.txusballesteros.testing.threading.UIThread;
-import com.txusballesteros.testing.view.instrumentation.internal.di.InstrumentationModule;
+import android.app.Activity;
 
-import javax.inject.Singleton;
+import com.txusballesteros.testing.domain.usecase.internal.di.UseCasesModule;
+import com.txusballesteros.testing.presentation.internal.di.PresentationModule;
+import com.txusballesteros.testing.view.internal.di.ActivityModule;
+import com.txusballesteros.testing.view.internal.di.ViewModule;
 
 import dagger.Module;
 import dagger.Provides;
 
-public interface ApplicationModule {
-    Application provideApplication();
-    ThreadExecutor provideThreadExecutor(JobExecutor executor);
-    PostExecutionThread providePostExecutionThread();
+@Module(includes = {
+    ViewModule.class,
+    PresentationModule.class,
+    UseCasesModule.class
+})
+public class TestingActivityModule implements ActivityModule {
+    private final Activity activity;
+
+    public TestingActivityModule(Activity activity) {
+        this.activity = activity;
+    }
+
+    @Override @Provides
+    public Activity provideActivity() {
+        return activity;
+    }
 }

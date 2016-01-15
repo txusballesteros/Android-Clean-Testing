@@ -22,16 +22,14 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.internal.di;
+package com.txusballesteros.testing.internal.di.scopes;
 
-import com.txusballesteros.testing.data.api.endpoint.internal.di.EndpointsModule;
-import com.txusballesteros.testing.data.api.internal.di.ApiModule;
+import java.lang.annotation.Retention;
 
-import dagger.Module;
+import javax.inject.Scope;
 
-@Module ( includes = {
-        ApiModule.class,
-        EndpointsModule.class
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-})
-public class IntegrationTestModule { }
+@Scope
+@Retention(RUNTIME)
+public @interface PerTest {}

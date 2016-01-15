@@ -22,37 +22,28 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.api;
+package com.txusballesteros.testing.internal.di;
 
-import com.txusballesteros.testing.IntegrationTest;
-import com.txusballesteros.testing.data.api.DashboardApi;
-import com.txusballesteros.testing.data.api.model.ImageResponse;
-import com.txusballesteros.testing.internal.di.DaggerIntegrationTestComponent;
+import android.app.Activity;
 
-import org.junit.Test;
+import com.txusballesteros.testing.Application;
+import com.txusballesteros.testing.view.MainActivity;
+import com.txusballesteros.testing.view.internal.di.DaggerRuntimeActivityComponent;
+import com.txusballesteros.testing.view.internal.di.RuntimeActivityModule;
+import com.txusballesteros.testing.view.internal.di.ViewModule;
 
-import java.util.List;
-
-import javax.inject.Inject;
-
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertNotNull;
-
-public class DashboardApiIntegrationTest extends IntegrationTest {
-    @Inject DashboardApi api;
-
+public class RuntimeDependenciesInjector implements DependenciesInjector {
     @Override
-    protected void onInitializeInjection() {
-        DaggerIntegrationTestComponent.builder()
+    public void inject(MainActivity client) {
+        DaggerRuntimeActivityComponent.builder()
+                .applicationComponent(getApplicationComponent(client))
+                .runtimeActivityModule(new RuntimeActivityModule(client))
+                .viewModule(new ViewModule(client))
                 .build()
-                .inject(this);
+                .inject(client);
     }
 
-    @Test
-    public void shouldGetDashboard() {
-        final List<ImageResponse> response = api.getDashboard();
-
-        assertNotNull(response);
-        assertFalse(response.isEmpty());
+    private ApplicationComponent getApplicationComponent(Activity activity) {
+        return  ((Application)activity.getApplication()).getApplicationComponent();
     }
 }

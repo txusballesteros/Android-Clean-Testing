@@ -24,17 +24,22 @@
  */
 package com.txusballesteros.testing;
 
-import android.support.test.runner.AndroidJUnit4;
+import com.txusballesteros.testing.internal.di.ApplicationComponent;
+import com.txusballesteros.testing.internal.di.DaggerTestingApplicationComponent;
+import com.txusballesteros.testing.internal.di.DependenciesInjector;
+import com.txusballesteros.testing.internal.di.TestingApplicationModule;
+import com.txusballesteros.testing.internal.di.TestingDependenciesInjector;
 
-import org.junit.Before;
-import org.junit.runner.RunWith;
-
-@RunWith(AndroidJUnit4.class)
-public abstract class IntegrationTest {
-    @Before
-    public final void setup() {
-        onInitializeInjection();
+public class TestingApplication extends Application {
+    @Override
+    public ApplicationComponent getApplicationComponent() {
+        return DaggerTestingApplicationComponent.builder()
+                                    .testingApplicationModule(new TestingApplicationModule(this))
+                                    .build();
     }
 
-    protected abstract void onInitializeInjection();
+    @Override
+    public DependenciesInjector getDependenciesInjector() {
+        return new TestingDependenciesInjector();
+    }
 }

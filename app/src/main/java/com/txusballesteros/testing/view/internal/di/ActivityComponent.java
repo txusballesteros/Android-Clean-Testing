@@ -26,15 +26,8 @@ package com.txusballesteros.testing.view.internal.di;
 
 import android.app.Activity;
 
-import dagger.Component;
-
-import com.txusballesteros.testing.internal.di.ApplicationComponent;
 import com.txusballesteros.testing.view.MainActivity;
-import com.txusballesteros.testing.internal.di.scopes.PerActivity;
 
-@PerActivity
-@Component(dependencies = ApplicationComponent.class,
-           modules = ActivityModule.class)
 public interface ActivityComponent {
     void inject(MainActivity activity);
 

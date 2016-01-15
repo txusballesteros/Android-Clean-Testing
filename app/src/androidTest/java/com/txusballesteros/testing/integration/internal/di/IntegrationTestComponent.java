@@ -22,10 +22,16 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.view.internal.di;
+package com.txusballesteros.testing.integration.internal.di;
 
-import android.app.Activity;
+import com.txusballesteros.testing.integration.api.DashboardApiIntegrationTest;
 
-public interface ActivityModule {
-    Activity provideActivity();
+import javax.inject.Singleton;
+
+import dagger.Component;
+
+@Singleton
+@Component( modules = IntegrationTestModule.class )
+public interface IntegrationTestComponent {
+    void inject(DashboardApiIntegrationTest test);
 }
