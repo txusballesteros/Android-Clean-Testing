@@ -7,7 +7,7 @@ You will see the following kind of tests.
 
 * Unit Tests
 * Integration Tests
-* Instrumentation Tests (Soon)
+* Instrumentation Tests
 
 By the way, also I want to show a full example about my personal approach of [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html).
  
