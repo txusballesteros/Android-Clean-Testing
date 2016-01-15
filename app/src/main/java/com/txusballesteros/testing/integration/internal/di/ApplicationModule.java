@@ -22,7 +22,7 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.internal.di;
+package com.txusballesteros.testing.integration.internal.di;
 
 import com.txusballesteros.testing.Application;
 import com.txusballesteros.testing.data.api.endpoint.internal.di.EndpointsModule;

@@ -51,6 +51,7 @@ ext {
     butterKnifeVersion = '7.0.1'
     dexmakerVersion = '1.1'
     androidTestVersion = '0.4.1'
+    espressoVersion = '2.2.1'
 
     mobileDependencies = [
         javaxAnnotation:  "org.glassfish:javax.annotation:${javaxAnnotationVersion}",
@@ -67,5 +68,6 @@ ext {
         dexmaker:         "com.google.dexmaker:dexmaker:${dexmakerVersion}",
         dexmaker_mockito: "com.google.dexmaker:dexmaker-mockito:${dexmakerVersion}",
         androidTestRunner:"com.android.support.test:runner:${androidTestVersion}",
+        espressoCore:     "com.android.support.test.espresso:espresso-core:${espressoVersion}",
     ]
 }

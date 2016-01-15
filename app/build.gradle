@@ -75,6 +75,9 @@ dependencies {
     androidTestCompile mobileDependencies.mockito
     androidTestCompile mobileDependencies.dexmaker
     androidTestCompile mobileDependencies.dexmaker_mockito
+    androidTestCompile (mobileDependencies.espressoCore) {
+        exclude module: 'support-annotations'
+    }
     androidTestCompile (mobileDependencies.androidTestRunner) {
         exclude module: 'support-annotations'
     }

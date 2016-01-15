@@ -22,26 +22,19 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.internal.di;
+package com.txusballesteros.testing.integration;
 
-import com.txusballesteros.testing.Application;
-import com.txusballesteros.testing.domain.repository.DashboardRepository;
-import com.txusballesteros.testing.threading.PostExecutionThread;
-import com.txusballesteros.testing.threading.ThreadExecutor;
-import com.txusballesteros.testing.view.instrumentation.ImageLoader;
+import android.support.test.runner.AndroidJUnit4;
 
-import javax.inject.Singleton;
+import org.junit.Before;
+import org.junit.runner.RunWith;
 
-import dagger.Component;
+@RunWith(AndroidJUnit4.class)
+public abstract class IntegrationTest {
+    @Before
+    public final void setup() {
+        onInitializeInjection();
+    }
 
-@Singleton
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
-    void inject(Application client);
-
-    Application getApplication();
-    ThreadExecutor getThreadExecutor();
-    PostExecutionThread getPostExecutionThread();
-    ImageLoader getImageLoader();
-    DashboardRepository getDashboardRepository();
+    protected abstract void onInitializeInjection();
 }

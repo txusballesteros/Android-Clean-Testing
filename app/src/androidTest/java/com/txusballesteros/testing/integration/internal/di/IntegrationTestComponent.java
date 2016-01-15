@@ -22,29 +22,16 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing;
+package com.txusballesteros.testing.integration.internal.di;
 
-import com.txusballesteros.testing.integration.internal.di.ApplicationComponent;
-import com.txusballesteros.testing.integration.internal.di.ApplicationModule;
-import com.txusballesteros.testing.integration.internal.di.DaggerApplicationComponent;
+import com.txusballesteros.testing.integration.api.DashboardApiIntegrationTest;
 
-public class Application extends android.app.Application {
-    private ApplicationComponent applicationComponent;
+import javax.inject.Singleton;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        initializeInjection();
-    }
+import dagger.Component;
 
-    private void initializeInjection() {
-        this.applicationComponent = DaggerApplicationComponent.builder()
-                                            .applicationModule(new ApplicationModule(this))
-                                            .build();
-        this.applicationComponent.inject(this);
-    }
-
-    public ApplicationComponent getApplicationComponent() {
-        return applicationComponent;
-    }
+@Singleton
+@Component( modules = IntegrationTestModule.class )
+public interface IntegrationTestComponent {
+    void inject(DashboardApiIntegrationTest test);
 }

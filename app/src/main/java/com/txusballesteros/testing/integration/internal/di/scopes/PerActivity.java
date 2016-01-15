@@ -22,16 +22,12 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.internal.di;
+package com.txusballesteros.testing.integration.internal.di.scopes;
 
-import com.txusballesteros.testing.api.DashboardApiIntegrationTest;
+import javax.inject.Scope;
+import java.lang.annotation.Retention;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-import javax.inject.Singleton;
-
-import dagger.Component;
-
-@Singleton
-@Component( modules = IntegrationTestModule.class )
-public interface IntegrationTestComponent {
-    void inject(DashboardApiIntegrationTest test);
-}
+@Scope
+@Retention(RUNTIME)
+public @interface PerActivity {}

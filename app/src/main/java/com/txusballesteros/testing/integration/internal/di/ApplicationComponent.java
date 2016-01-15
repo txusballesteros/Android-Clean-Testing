@@ -22,16 +22,26 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.internal.di;
+package com.txusballesteros.testing.integration.internal.di;
 
-import com.txusballesteros.testing.data.api.endpoint.internal.di.EndpointsModule;
-import com.txusballesteros.testing.data.api.internal.di.ApiModule;
+import com.txusballesteros.testing.Application;
+import com.txusballesteros.testing.domain.repository.DashboardRepository;
+import com.txusballesteros.testing.threading.PostExecutionThread;
+import com.txusballesteros.testing.threading.ThreadExecutor;
+import com.txusballesteros.testing.view.instrumentation.ImageLoader;
 
-import dagger.Module;
+import javax.inject.Singleton;
 
-@Module ( includes = {
-        ApiModule.class,
-        EndpointsModule.class
+import dagger.Component;
 
-})
-public class IntegrationTestModule { }
+@Singleton
+@Component(modules = ApplicationModule.class)
+public interface ApplicationComponent {
+    void inject(Application client);
+
+    Application getApplication();
+    ThreadExecutor getThreadExecutor();
+    PostExecutionThread getPostExecutionThread();
+    ImageLoader getImageLoader();
+    DashboardRepository getDashboardRepository();
+}

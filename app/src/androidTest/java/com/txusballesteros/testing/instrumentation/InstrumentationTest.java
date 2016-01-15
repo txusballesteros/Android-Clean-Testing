@@ -22,37 +22,19 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.api;
+package com.txusballesteros.testing.instrumentation;
 
-import com.txusballesteros.testing.IntegrationTest;
-import com.txusballesteros.testing.data.api.DashboardApi;
-import com.txusballesteros.testing.data.api.model.ImageResponse;
-import com.txusballesteros.testing.internal.di.DaggerIntegrationTestComponent;
+import android.support.test.runner.AndroidJUnit4;
 
-import org.junit.Test;
+import org.junit.Before;
+import org.junit.runner.RunWith;
 
-import java.util.List;
-
-import javax.inject.Inject;
-
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertNotNull;
-
-public class DashboardApiIntegrationTest extends IntegrationTest {
-    @Inject DashboardApi api;
-
-    @Override
-    protected void onInitializeInjection() {
-        DaggerIntegrationTestComponent.builder()
-                .build()
-                .inject(this);
+@RunWith(AndroidJUnit4.class)
+public abstract class InstrumentationTest {
+    @Before
+    public final void setup() {
+        onInitializeInjection();
     }
 
-    @Test
-    public void shouldGetDashboard() {
-        final List<ImageResponse> response = api.getDashboard();
-
-        assertNotNull(response);
-        assertFalse(response.isEmpty());
-    }
+    protected abstract void onInitializeInjection();
 }

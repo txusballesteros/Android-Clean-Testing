@@ -28,7 +28,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.txusballesteros.testing.Application;
-import com.txusballesteros.testing.internal.di.ApplicationComponent;
+import com.txusballesteros.testing.integration.internal.di.ApplicationComponent;
 
 import butterknife.ButterKnife;
 
