@@ -22,14 +22,28 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.view.internal.di;
+package com.txusballesteros.testing.internal.di;
 
 import android.app.Activity;
 
+import com.txusballesteros.testing.Application;
+import com.txusballesteros.testing.instrumentation.view.internal.di.DaggerTestingActivityComponent;
+import com.txusballesteros.testing.instrumentation.view.internal.di.TestingActivityModule;
 import com.txusballesteros.testing.view.MainActivity;
+import com.txusballesteros.testing.view.internal.di.ViewModule;
 
-public interface ActivityComponent {
-    void inject(MainActivity activity);
+public class TestingDependenciesInjector implements DependenciesInjector {
+    @Override
+    public void inject(MainActivity client) {
+        DaggerTestingActivityComponent.builder()
+                .applicationComponent(getApplicationComponent(client))
+                .testingActivityModule(new TestingActivityModule(client))
+                .viewModule(new ViewModule(client))
+                .build()
+                .inject(client);
+    }
 
-    Activity getActivity();
+    private ApplicationComponent getApplicationComponent(Activity activity) {
+        return ((Application)activity.getApplication()).getApplicationComponent();
+    }
 }

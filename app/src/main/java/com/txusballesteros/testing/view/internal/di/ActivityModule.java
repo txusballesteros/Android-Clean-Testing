@@ -26,12 +26,6 @@ package com.txusballesteros.testing.view.internal.di;
 
 import android.app.Activity;
 
-import com.txusballesteros.testing.domain.usecase.internal.di.UseCasesModule;
-import com.txusballesteros.testing.presentation.internal.di.PresentationModule;
-
-import dagger.Module;
-import dagger.Provides;
-
 public interface ActivityModule {
     Activity provideActivity();
 }

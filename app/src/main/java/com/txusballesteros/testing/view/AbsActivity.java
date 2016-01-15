@@ -29,6 +29,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.txusballesteros.testing.Application;
 import com.txusballesteros.testing.internal.di.ApplicationComponent;
+import com.txusballesteros.testing.internal.di.DependenciesInjector;
 
 import butterknife.ButterKnife;
 
@@ -43,6 +44,10 @@ public abstract class AbsActivity extends AppCompatActivity {
 
     protected ApplicationComponent getApplicationComponent() {
         return ((Application)getApplication()).getApplicationComponent();
+    }
+
+    protected DependenciesInjector getDependenciesInjector() {
+        return ((Application)getApplication()).getDependenciesInjector();
     }
 
     private void initializeInjection() {

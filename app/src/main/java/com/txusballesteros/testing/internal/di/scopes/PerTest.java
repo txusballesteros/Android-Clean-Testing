@@ -22,24 +22,14 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing;
+package com.txusballesteros.testing.internal.di.scopes;
 
-import com.txusballesteros.testing.internal.di.ApplicationComponent;
-import com.txusballesteros.testing.internal.di.DaggerTestingApplicationComponent;
-import com.txusballesteros.testing.internal.di.DependenciesInjector;
-import com.txusballesteros.testing.internal.di.TestingApplicationModule;
-import com.txusballesteros.testing.internal.di.TestingDependenciesInjector;
+import java.lang.annotation.Retention;
 
-public class TestingApplication extends Application {
-    @Override
-    public ApplicationComponent getApplicationComponent() {
-        return DaggerTestingApplicationComponent.builder()
-                                    .testingApplicationModule(new TestingApplicationModule(this))
-                                    .build();
-    }
+import javax.inject.Scope;
 
-    @Override
-    public DependenciesInjector getDependenciesInjector() {
-        return new TestingDependenciesInjector();
-    }
-}
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+@Scope
+@Retention(RUNTIME)
+public @interface PerTest {}

@@ -22,24 +22,10 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing;
+package com.txusballesteros.testing.internal.di;
 
-import com.txusballesteros.testing.internal.di.ApplicationComponent;
-import com.txusballesteros.testing.internal.di.DaggerTestingApplicationComponent;
-import com.txusballesteros.testing.internal.di.DependenciesInjector;
-import com.txusballesteros.testing.internal.di.TestingApplicationModule;
-import com.txusballesteros.testing.internal.di.TestingDependenciesInjector;
+import com.txusballesteros.testing.view.MainActivity;
 
-public class TestingApplication extends Application {
-    @Override
-    public ApplicationComponent getApplicationComponent() {
-        return DaggerTestingApplicationComponent.builder()
-                                    .testingApplicationModule(new TestingApplicationModule(this))
-                                    .build();
-    }
-
-    @Override
-    public DependenciesInjector getDependenciesInjector() {
-        return new TestingDependenciesInjector();
-    }
+public interface DependenciesInjector {
+    void inject(MainActivity client);
 }

@@ -22,24 +22,32 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing;
+package com.txusballesteros.testing.instrumentation.view.internal.di;
 
-import com.txusballesteros.testing.internal.di.ApplicationComponent;
-import com.txusballesteros.testing.internal.di.DaggerTestingApplicationComponent;
-import com.txusballesteros.testing.internal.di.DependenciesInjector;
-import com.txusballesteros.testing.internal.di.TestingApplicationModule;
-import com.txusballesteros.testing.internal.di.TestingDependenciesInjector;
+import android.app.Activity;
 
-public class TestingApplication extends Application {
-    @Override
-    public ApplicationComponent getApplicationComponent() {
-        return DaggerTestingApplicationComponent.builder()
-                                    .testingApplicationModule(new TestingApplicationModule(this))
-                                    .build();
+import com.txusballesteros.testing.domain.usecase.internal.di.UseCasesModule;
+import com.txusballesteros.testing.presentation.internal.di.PresentationModule;
+import com.txusballesteros.testing.view.internal.di.ActivityModule;
+import com.txusballesteros.testing.view.internal.di.ViewModule;
+
+import dagger.Module;
+import dagger.Provides;
+
+@Module(includes = {
+    ViewModule.class,
+    PresentationModule.class,
+    UseCasesModule.class
+})
+public class TestingActivityModule implements ActivityModule {
+    private final Activity activity;
+
+    public TestingActivityModule(Activity activity) {
+        this.activity = activity;
     }
 
-    @Override
-    public DependenciesInjector getDependenciesInjector() {
-        return new TestingDependenciesInjector();
+    @Override @Provides
+    public Activity provideActivity() {
+        return activity;
     }
 }

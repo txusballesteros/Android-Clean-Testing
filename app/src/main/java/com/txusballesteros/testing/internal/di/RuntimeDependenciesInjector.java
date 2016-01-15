@@ -22,24 +22,28 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing;
+package com.txusballesteros.testing.internal.di;
 
-import com.txusballesteros.testing.internal.di.ApplicationComponent;
-import com.txusballesteros.testing.internal.di.DaggerTestingApplicationComponent;
-import com.txusballesteros.testing.internal.di.DependenciesInjector;
-import com.txusballesteros.testing.internal.di.TestingApplicationModule;
-import com.txusballesteros.testing.internal.di.TestingDependenciesInjector;
+import android.app.Activity;
 
-public class TestingApplication extends Application {
+import com.txusballesteros.testing.Application;
+import com.txusballesteros.testing.view.MainActivity;
+import com.txusballesteros.testing.view.internal.di.DaggerRuntimeActivityComponent;
+import com.txusballesteros.testing.view.internal.di.RuntimeActivityModule;
+import com.txusballesteros.testing.view.internal.di.ViewModule;
+
+public class RuntimeDependenciesInjector implements DependenciesInjector {
     @Override
-    public ApplicationComponent getApplicationComponent() {
-        return DaggerTestingApplicationComponent.builder()
-                                    .testingApplicationModule(new TestingApplicationModule(this))
-                                    .build();
+    public void inject(MainActivity client) {
+        DaggerRuntimeActivityComponent.builder()
+                .applicationComponent(getApplicationComponent(client))
+                .runtimeActivityModule(new RuntimeActivityModule(client))
+                .viewModule(new ViewModule(client))
+                .build()
+                .inject(client);
     }
 
-    @Override
-    public DependenciesInjector getDependenciesInjector() {
-        return new TestingDependenciesInjector();
+    private ApplicationComponent getApplicationComponent(Activity activity) {
+        return  ((Application)activity.getApplication()).getApplicationComponent();
     }
 }
