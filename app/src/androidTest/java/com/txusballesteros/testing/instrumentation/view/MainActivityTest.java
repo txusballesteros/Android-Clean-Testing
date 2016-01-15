@@ -28,11 +28,17 @@ import android.content.Intent;
 import android.support.test.rule.ActivityTestRule;
 import android.test.suitebuilder.annotation.LargeTest;
 
+import com.txusballesteros.testing.R;
 import com.txusballesteros.testing.instrumentation.InstrumentationTest;
 import com.txusballesteros.testing.view.MainActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
+
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 @LargeTest
 public class MainActivityTest extends InstrumentationTest {
@@ -42,5 +48,7 @@ public class MainActivityTest extends InstrumentationTest {
     @Test
     public void shouldLaunchActivity() {
         activityRule.launchActivity(new Intent());
+
+        onView(withId(R.id.list)).check(matches(isDisplayed()));
     }
 }
