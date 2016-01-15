@@ -43,4 +43,5 @@ android:
     - extra-android-m2repository
     - extra-android-support
 
-script: gradle build -x lint
+script:
+  - gradle build -x lint
