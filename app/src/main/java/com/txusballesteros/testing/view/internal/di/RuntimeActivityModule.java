@@ -26,14 +26,28 @@ package com.txusballesteros.testing.view.internal.di;
 
 import android.app.Activity;
 
-import dagger.Component;
+import com.txusballesteros.testing.domain.usecase.internal.di.UseCasesModule;
+import com.txusballesteros.testing.presentation.internal.di.PresentationModule;
 
-import com.txusballesteros.testing.internal.di.ApplicationComponent;
-import com.txusballesteros.testing.view.MainActivity;
-import com.txusballesteros.testing.internal.di.scopes.PerActivity;
+import dagger.Module;
+import dagger.Provides;
 
-public interface ActivityComponent {
-    void inject(MainActivity activity);
+@Module(
+        includes = {
+                ViewModule.class,
+                PresentationModule.class,
+                UseCasesModule.class
+        }
+)
+public class RuntimeActivityModule implements ActivityModule {
+    private final Activity activity;
 
-    Activity getActivity();
+    public RuntimeActivityModule(Activity activity) {
+        this.activity = activity;
+    }
+
+    @Override @Provides
+    public Activity provideActivity() {
+        return activity;
+    }
 }

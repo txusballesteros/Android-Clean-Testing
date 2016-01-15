@@ -32,22 +32,6 @@ import com.txusballesteros.testing.presentation.internal.di.PresentationModule;
 import dagger.Module;
 import dagger.Provides;
 
-@Module(
-        includes = {
-                ViewModule.class,
-                PresentationModule.class,
-                UseCasesModule.class
-        }
-)
-public class ActivityModule {
-    private final Activity activity;
-
-    public ActivityModule(Activity activity) {
-        this.activity = activity;
-    }
-
-    @Provides
-    Activity provideActivity() {
-        return activity;
-    }
+public interface ActivityModule {
+    Activity provideActivity();
 }

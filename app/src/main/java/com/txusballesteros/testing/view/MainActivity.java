@@ -31,8 +31,8 @@ import com.txusballesteros.testing.R;
 import com.txusballesteros.testing.presentation.MainPresenter;
 import com.txusballesteros.testing.presentation.model.ImageModel;
 import com.txusballesteros.testing.view.instrumentation.ImageLoader;
-import com.txusballesteros.testing.view.internal.di.ActivityModule;
-import com.txusballesteros.testing.view.internal.di.DaggerActivityComponent;
+import com.txusballesteros.testing.view.internal.di.DaggerRuntimeActivityComponent;
+import com.txusballesteros.testing.view.internal.di.RuntimeActivityModule;
 import com.txusballesteros.testing.view.internal.di.ViewModule;
 
 import java.util.List;
@@ -66,9 +66,9 @@ public class MainActivity extends AbsActivity implements MainPresenter.View {
 
     @Override
     void onInitializeInjection() {
-        DaggerActivityComponent.builder()
+        DaggerRuntimeActivityComponent.builder()
                 .applicationComponent(getApplicationComponent())
-                .activityModule(new ActivityModule(this))
+                .runtimeActivityModule(new RuntimeActivityModule(this))
                 .viewModule(new ViewModule(this))
                 .build()
                 .inject(this);
