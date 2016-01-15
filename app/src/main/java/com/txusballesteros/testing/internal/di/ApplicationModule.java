@@ -22,41 +22,27 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.view;
-
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+package com.txusballesteros.testing.internal.di;
 
 import com.txusballesteros.testing.Application;
-import com.txusballesteros.testing.internal.di.ApplicationComponent;
+import com.txusballesteros.testing.data.api.endpoint.internal.di.EndpointsModule;
+import com.txusballesteros.testing.data.api.internal.di.ApiModule;
+import com.txusballesteros.testing.data.cache.internal.di.CachesModule;
+import com.txusballesteros.testing.data.datasource.internal.di.DatasourcesModule;
+import com.txusballesteros.testing.data.internal.di.RepositoriesModule;
+import com.txusballesteros.testing.threading.JobExecutor;
+import com.txusballesteros.testing.threading.PostExecutionThread;
+import com.txusballesteros.testing.threading.ThreadExecutor;
+import com.txusballesteros.testing.threading.UIThread;
+import com.txusballesteros.testing.view.instrumentation.internal.di.InstrumentationModule;
 
-import butterknife.ButterKnife;
+import javax.inject.Singleton;
 
-public abstract class AbsActivity extends AppCompatActivity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(onRequestLayout());
-        initializeInjection();
-        initializeViewsInjection();
-    }
+import dagger.Module;
+import dagger.Provides;
 
-    protected ApplicationComponent getApplicationComponent() {
-        return ((Application)getApplication()).getApplicationComponent();
-    }
-
-    private void initializeInjection() {
-        onInitializeInjection();
-    }
-
-    private void initializeViewsInjection() {
-        ButterKnife.bind(this);
-        onViewReady();
-    }
-
-    abstract void onViewReady();
-
-    abstract int onRequestLayout();
-
-    abstract void onInitializeInjection();
+public interface ApplicationModule {
+    Application provideApplication();
+    ThreadExecutor provideThreadExecutor(JobExecutor executor);
+    PostExecutionThread providePostExecutionThread();
 }

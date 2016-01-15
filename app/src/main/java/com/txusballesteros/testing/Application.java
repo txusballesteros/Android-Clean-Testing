@@ -24,9 +24,9 @@
  */
 package com.txusballesteros.testing;
 
-import com.txusballesteros.testing.integration.internal.di.ApplicationComponent;
-import com.txusballesteros.testing.integration.internal.di.ApplicationModule;
-import com.txusballesteros.testing.integration.internal.di.DaggerApplicationComponent;
+import com.txusballesteros.testing.internal.di.ApplicationComponent;
+import com.txusballesteros.testing.internal.di.DaggerRuntimeApplicationComponent;
+import com.txusballesteros.testing.internal.di.RuntimeApplicationModule;
 
 public class Application extends android.app.Application {
     private ApplicationComponent applicationComponent;
@@ -38,10 +38,9 @@ public class Application extends android.app.Application {
     }
 
     private void initializeInjection() {
-        this.applicationComponent = DaggerApplicationComponent.builder()
-                                            .applicationModule(new ApplicationModule(this))
-                                            .build();
-        this.applicationComponent.inject(this);
+        this.applicationComponent = DaggerRuntimeApplicationComponent.builder()
+                                    .runtimeApplicationModule(new RuntimeApplicationModule(this))
+                                    .build();
     }
 
     public ApplicationComponent getApplicationComponent() {

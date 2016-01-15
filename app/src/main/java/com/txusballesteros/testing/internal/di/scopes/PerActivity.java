@@ -22,19 +22,12 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.integration;
+package com.txusballesteros.testing.internal.di.scopes;
 
-import android.support.test.runner.AndroidJUnit4;
+import javax.inject.Scope;
+import java.lang.annotation.Retention;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-import org.junit.Before;
-import org.junit.runner.RunWith;
-
-@RunWith(AndroidJUnit4.class)
-public abstract class IntegrationTest {
-    @Before
-    public final void setup() {
-        onInitializeInjection();
-    }
-
-    protected abstract void onInitializeInjection();
-}
+@Scope
+@Retention(RUNTIME)
+public @interface PerActivity {}

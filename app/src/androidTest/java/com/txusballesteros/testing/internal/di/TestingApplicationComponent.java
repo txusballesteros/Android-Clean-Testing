@@ -22,19 +22,12 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.integration;
+package com.txusballesteros.testing.internal.di;
 
-import android.support.test.runner.AndroidJUnit4;
+import javax.inject.Singleton;
 
-import org.junit.Before;
-import org.junit.runner.RunWith;
+import dagger.Component;
 
-@RunWith(AndroidJUnit4.class)
-public abstract class IntegrationTest {
-    @Before
-    public final void setup() {
-        onInitializeInjection();
-    }
-
-    protected abstract void onInitializeInjection();
-}
+@Singleton
+@Component(modules = TestingApplicationModule.class)
+public interface TestingApplicationComponent extends ApplicationComponent { }

@@ -28,9 +28,9 @@ import android.app.Activity;
 
 import dagger.Component;
 
-import com.txusballesteros.testing.integration.internal.di.ApplicationComponent;
+import com.txusballesteros.testing.internal.di.ApplicationComponent;
 import com.txusballesteros.testing.view.MainActivity;
-import com.txusballesteros.testing.integration.internal.di.scopes.PerActivity;
+import com.txusballesteros.testing.internal.di.scopes.PerActivity;
 
 @PerActivity
 @Component(dependencies = ApplicationComponent.class,

@@ -24,9 +24,11 @@
  */
 package com.txusballesteros.testing.integration.api;
 
-import com.txusballesteros.testing.integration.IntegrationTest;
+import android.test.suitebuilder.annotation.LargeTest;
+
 import com.txusballesteros.testing.data.api.DashboardApi;
 import com.txusballesteros.testing.data.api.model.ImageResponse;
+import com.txusballesteros.testing.integration.IntegrationTest;
 import com.txusballesteros.testing.integration.internal.di.DaggerIntegrationTestComponent;
 
 import org.junit.Test;
@@ -38,6 +40,7 @@ import javax.inject.Inject;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
 
+@LargeTest
 public class DashboardApiIntegrationTest extends IntegrationTest {
     @Inject DashboardApi api;
 

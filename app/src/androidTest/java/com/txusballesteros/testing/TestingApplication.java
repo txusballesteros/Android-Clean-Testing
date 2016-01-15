@@ -22,12 +22,17 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.integration.internal.di.scopes;
+package com.txusballesteros.testing;
 
-import javax.inject.Scope;
-import java.lang.annotation.Retention;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import com.txusballesteros.testing.internal.di.ApplicationComponent;
+import com.txusballesteros.testing.internal.di.DaggerTestingApplicationComponent;
+import com.txusballesteros.testing.internal.di.TestingApplicationModule;
 
-@Scope
-@Retention(RUNTIME)
-public @interface PerActivity {}
+public class TestingApplication extends Application {
+    @Override
+    public ApplicationComponent getApplicationComponent() {
+        return DaggerTestingApplicationComponent.builder()
+                                    .testingApplicationModule(new TestingApplicationModule(this))
+                                    .build();
+    }
+}

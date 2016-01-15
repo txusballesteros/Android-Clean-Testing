@@ -33,8 +33,8 @@ import org.junit.runner.RunWith;
 public abstract class InstrumentationTest {
     @Before
     public final void setup() {
-        onInitializeInjection();
+        onSetup();
     }
 
-    protected abstract void onInitializeInjection();
+    protected void onSetup() { }
 }

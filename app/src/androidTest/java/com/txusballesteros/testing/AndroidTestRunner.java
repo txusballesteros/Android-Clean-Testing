@@ -22,26 +22,16 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.integration.internal.di;
+package com.txusballesteros.testing;
 
-import com.txusballesteros.testing.Application;
-import com.txusballesteros.testing.domain.repository.DashboardRepository;
-import com.txusballesteros.testing.threading.PostExecutionThread;
-import com.txusballesteros.testing.threading.ThreadExecutor;
-import com.txusballesteros.testing.view.instrumentation.ImageLoader;
+import android.content.Context;
+import android.support.test.runner.AndroidJUnitRunner;
 
-import javax.inject.Singleton;
-
-import dagger.Component;
-
-@Singleton
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
-    void inject(Application client);
-
-    Application getApplication();
-    ThreadExecutor getThreadExecutor();
-    PostExecutionThread getPostExecutionThread();
-    ImageLoader getImageLoader();
-    DashboardRepository getDashboardRepository();
+public class AndroidTestRunner extends AndroidJUnitRunner {
+    @Override
+    public android.app.Application newApplication(ClassLoader classLoader,
+                                                  String className, Context context)
+                     throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+        return super.newApplication(classLoader, TestingApplication.class.getName(), context);
+    }
 }

@@ -22,19 +22,25 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.integration;
+package com.txusballesteros.testing.instrumentation.view;
 
-import android.support.test.runner.AndroidJUnit4;
+import android.content.Intent;
+import android.support.test.rule.ActivityTestRule;
+import android.test.suitebuilder.annotation.LargeTest;
 
-import org.junit.Before;
-import org.junit.runner.RunWith;
+import com.txusballesteros.testing.instrumentation.InstrumentationTest;
+import com.txusballesteros.testing.view.MainActivity;
 
-@RunWith(AndroidJUnit4.class)
-public abstract class IntegrationTest {
-    @Before
-    public final void setup() {
-        onInitializeInjection();
+import org.junit.Rule;
+import org.junit.Test;
+
+@LargeTest
+public class MainActivityTest extends InstrumentationTest {
+    @Rule public ActivityTestRule<MainActivity> activityRule
+                                        = new ActivityTestRule<>(MainActivity.class, true, false);
+
+    @Test
+    public void shouldLaunchActivity() {
+        activityRule.launchActivity(new Intent());
     }
-
-    protected abstract void onInitializeInjection();
 }

@@ -22,7 +22,7 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing.integration.internal.di;
+package com.txusballesteros.testing.internal.di;
 
 import com.txusballesteros.testing.Application;
 import com.txusballesteros.testing.data.api.endpoint.internal.di.EndpointsModule;
@@ -49,25 +49,25 @@ import dagger.Provides;
         ApiModule.class,
         EndpointsModule.class
 })
-public class ApplicationModule {
+public class TestingApplicationModule implements ApplicationModule {
     private final Application application;
 
-    public ApplicationModule(Application application) {
+    public TestingApplicationModule(Application application) {
         this.application = application;
     }
 
-    @Provides
-    Application provideApplication() {
+    @Override @Provides
+    public Application provideApplication() {
         return application;
     }
 
-    @Provides @Singleton
-    ThreadExecutor provideThreadExecutor(JobExecutor executor) {
+    @Override @Provides @Singleton
+    public ThreadExecutor provideThreadExecutor(JobExecutor executor) {
         return executor;
     }
 
-    @Provides @Singleton
-    PostExecutionThread providePostExecutionThread() {
+    @Override @Provides @Singleton
+    public PostExecutionThread providePostExecutionThread() {
         return UIThread.getInstance();
     }
 }
