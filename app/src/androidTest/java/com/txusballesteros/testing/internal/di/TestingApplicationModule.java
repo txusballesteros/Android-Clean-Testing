@@ -70,4 +70,9 @@ public class TestingApplicationModule implements ApplicationModule {
     public PostExecutionThread providePostExecutionThread() {
         return UIThread.getInstance();
     }
+
+    @Override @Provides @Singleton
+    public DependenciesInjector provideDependenciesInjector() {
+        return new TestingDependenciesInjector();
+    }
 }

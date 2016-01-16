@@ -45,4 +45,5 @@ public interface ApplicationModule {
     Application provideApplication();
     ThreadExecutor provideThreadExecutor(JobExecutor executor);
     PostExecutionThread providePostExecutionThread();
+    DependenciesInjector provideDependenciesInjector();
 }

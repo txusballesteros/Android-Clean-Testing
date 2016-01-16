@@ -24,10 +24,14 @@
  */
 package com.txusballesteros.testing.internal.di;
 
+import com.txusballesteros.testing.TestingApplication;
+
 import javax.inject.Singleton;
 
 import dagger.Component;
 
 @Singleton
 @Component(modules = TestingApplicationModule.class)
-public interface TestingApplicationComponent extends ApplicationComponent { }
+public interface TestingApplicationComponent extends ApplicationComponent {
+    void inject(TestingApplication application);
+}

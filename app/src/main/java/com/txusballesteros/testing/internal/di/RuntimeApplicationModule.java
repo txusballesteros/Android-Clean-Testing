@@ -70,4 +70,9 @@ public class RuntimeApplicationModule implements ApplicationModule {
     public PostExecutionThread providePostExecutionThread() {
         return UIThread.getInstance();
     }
+
+    @Override @Provides @Singleton
+    public DependenciesInjector provideDependenciesInjector() {
+        return new RuntimeDependenciesInjector();
+    }
 }
