@@ -27,19 +27,36 @@ package com.txusballesteros.testing;
 import com.txusballesteros.testing.internal.di.ApplicationComponent;
 import com.txusballesteros.testing.internal.di.DaggerTestingApplicationComponent;
 import com.txusballesteros.testing.internal.di.DependenciesInjector;
+import com.txusballesteros.testing.internal.di.TestingApplicationComponent;
 import com.txusballesteros.testing.internal.di.TestingApplicationModule;
-import com.txusballesteros.testing.internal.di.TestingDependenciesInjector;
+
+import javax.inject.Inject;
 
 public class TestingApplication extends Application {
+    private TestingApplicationComponent applicationComponent;
+    @Inject DependenciesInjector injector;
+
     @Override
-    public ApplicationComponent getApplicationComponent() {
-        return DaggerTestingApplicationComponent.builder()
+    public void onCreate() {
+        super.onCreate();
+        initialzieInjection();
+    }
+
+    private void initialzieInjection() {
+        applicationComponent =  DaggerTestingApplicationComponent
+                                    .builder()
                                     .testingApplicationModule(new TestingApplicationModule(this))
                                     .build();
+        applicationComponent.inject(this);
+    }
+
+    @Override
+    public ApplicationComponent getApplicationComponent() {
+        return applicationComponent;
     }
 
     @Override
     public DependenciesInjector getDependenciesInjector() {
-        return new TestingDependenciesInjector();
+        return injector;
     }
 }

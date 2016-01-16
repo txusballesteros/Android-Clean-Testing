@@ -27,11 +27,15 @@ package com.txusballesteros.testing;
 import com.txusballesteros.testing.internal.di.ApplicationComponent;
 import com.txusballesteros.testing.internal.di.DaggerRuntimeApplicationComponent;
 import com.txusballesteros.testing.internal.di.DependenciesInjector;
+import com.txusballesteros.testing.internal.di.RuntimeApplicationComponent;
 import com.txusballesteros.testing.internal.di.RuntimeApplicationModule;
 import com.txusballesteros.testing.internal.di.RuntimeDependenciesInjector;
 
+import javax.inject.Inject;
+
 public class Application extends android.app.Application {
-    private ApplicationComponent applicationComponent;
+    private RuntimeApplicationComponent applicationComponent;
+    @Inject DependenciesInjector injector;
 
     @Override
     public void onCreate() {
@@ -40,9 +44,10 @@ public class Application extends android.app.Application {
     }
 
     private void initializeInjection() {
-        this.applicationComponent = DaggerRuntimeApplicationComponent.builder()
+        applicationComponent = DaggerRuntimeApplicationComponent.builder()
                                     .runtimeApplicationModule(new RuntimeApplicationModule(this))
                                     .build();
+        applicationComponent.inject(this);
     }
 
     public ApplicationComponent getApplicationComponent() {
@@ -50,6 +55,6 @@ public class Application extends android.app.Application {
     }
 
     public DependenciesInjector getDependenciesInjector() {
-        return new RuntimeDependenciesInjector();
+        return injector;
     }
 }
