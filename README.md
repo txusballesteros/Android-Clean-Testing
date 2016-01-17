@@ -1,4 +1,4 @@
-![](https://img.shields.io/badge/Platform-Android-green.svg) ![](https://img.shields.io/badge/Architecture-Clean%20Architecture-green.svg) ![](https://img.shields.io/badge/Principles-SOLID-red.svg) ![](https://img.shields.io/badge/Testing-JUnit%204%20&%20Espresso-green.svg) [![](https://img.shields.io/badge/Android%20Weekly-%23Issue%20188-blue.svg)](http://androidweekly.net/issues/issue-188) ![](https://api.travis-ci.org/txusballesteros/Android-Clean-Testing.svg)
+![](https://img.shields.io/badge/platform-Android-green.svg) ![](https://img.shields.io/badge/architecture-Clean%20Architecture-green.svg) ![](https://img.shields.io/badge/principles-SOLID-red.svg) ![](https://img.shields.io/badge/testing-JUnit%204%20&%20Espresso-green.svg) [![](https://img.shields.io/badge/android%20weekly-%23Issue%20188-blue.svg)](http://androidweekly.net/issues/issue-188) ![](https://api.travis-ci.org/txusballesteros/Android-Clean-Testing.svg)
 
 Android Clean & Testing Example
 ===============================
