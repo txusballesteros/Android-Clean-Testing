@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Platform-Android-green.svg) ![](https://img.shields.io/badge/Architecture-Clean%20Architecture-green.svg) ![](https://img.shields.io/badge/Testing-JUnit%204-green.svg) ![](https://img.shields.io/badge/Testing-Espresso-green.svg) ![](https://api.travis-ci.org/txusballesteros/Android-Clean-Testing.svg) ![](https://img.shields.io/badge/Android%20Weekly-Issue%20188-blue.svg)
+
 Android Clean & Testing Example
 ===============================
 
