@@ -39,10 +39,10 @@ public class TestingApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        initialzieInjection();
+        initializeInjection();
     }
 
-    private void initialzieInjection() {
+    private void initializeInjection() {
         applicationComponent =  DaggerTestingApplicationComponent
                                     .builder()
                                     .testingApplicationModule(new TestingApplicationModule(this))

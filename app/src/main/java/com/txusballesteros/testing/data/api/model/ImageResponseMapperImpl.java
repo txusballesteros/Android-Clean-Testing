@@ -28,6 +28,7 @@ import android.net.Uri;
 
 import com.txusballesteros.testing.data.api.endpoint.model.DashboardEndpointResponse;
 import com.txusballesteros.testing.data.api.endpoint.model.DashboardListEndpointResponse;
+import com.txusballesteros.testing.data.api.transformer.ImageUriTransformer;
 import com.txusballesteros.testing.data.datasource.model.ImageEntity;
 
 import java.util.ArrayList;
@@ -36,8 +37,12 @@ import java.util.List;
 import javax.inject.Inject;
 
 public class ImageResponseMapperImpl implements ImageResponseMapper {
+    private final ImageUriTransformer imageUriTransformer;
+
     @Inject
-    public ImageResponseMapperImpl() { }
+    public ImageResponseMapperImpl(ImageUriTransformer imageUriTransformer) {
+        this.imageUriTransformer = imageUriTransformer;
+    }
 
     @Override
     public List<ImageResponse> map(DashboardListEndpointResponse source) {
@@ -69,7 +74,7 @@ public class ImageResponseMapperImpl implements ImageResponseMapper {
     @Override
     public ImageResponse map(DashboardEndpointResponse source) {
         return new ImageResponse.Builder()
-                .setUrl(Uri.parse(String.format("http://i.giphy.com/%s.gif", source.id)))
+                .setUrl(Uri.parse(imageUriTransformer.transform(source.id)))
                 .build();
     }
 }

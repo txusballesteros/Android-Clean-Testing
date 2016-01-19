@@ -41,7 +41,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
-public class DashboardRetrofitApiTest extends UnitTest {
+public class DashboardRetrofitApiUnitTest extends UnitTest {
     @Mock DashboardEndpoint endpointMock;
     @Mock ImageResponseMapper mapperMock;
     @Mock Call<DashboardListEndpointResponse> apiCallerMock;
