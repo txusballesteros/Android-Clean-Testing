@@ -22,27 +22,18 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing;
+package com.txusballesteros.testing.data.api.transformer;
 
-import android.test.suitebuilder.annotation.SmallTest;
+import javax.inject.Inject;
 
-import org.junit.Before;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-import org.mockito.MockitoAnnotations;
+public class GiphyImageUriTransformer implements ImageUriTransformer {
+    public static final String GIPHY_IMAGE_URI_PATTERN = "http://i.giphy.com/%s.gif";
 
-@RunWith(JUnit4.class)
-@SmallTest
-public abstract class UnitTest {
-    @Before
-    public final void setup() {
-        initializeMocks();
-        onSetup();
+    @Inject
+    public GiphyImageUriTransformer() { }
+
+    @Override
+    public String transform(String imageId) {
+        return String.format(GIPHY_IMAGE_URI_PATTERN, imageId);
     }
-
-    private void initializeMocks() {
-        MockitoAnnotations.initMocks(this);
-    }
-
-    protected abstract void onSetup();
 }

@@ -22,27 +22,20 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing;
+package com.txusballesteros.testing.data.api.transformer.internal.di;
 
-import android.test.suitebuilder.annotation.SmallTest;
+import com.txusballesteros.testing.data.api.transformer.GiphyImageUriTransformer;
+import com.txusballesteros.testing.data.api.transformer.ImageUriTransformer;
 
-import org.junit.Before;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-import org.mockito.MockitoAnnotations;
+import javax.inject.Singleton;
 
-@RunWith(JUnit4.class)
-@SmallTest
-public abstract class UnitTest {
-    @Before
-    public final void setup() {
-        initializeMocks();
-        onSetup();
+import dagger.Module;
+import dagger.Provides;
+
+@Module
+public class TranformerModule {
+    @Provides @Singleton
+    ImageUriTransformer provideImageUriTransformer(GiphyImageUriTransformer transformer) {
+        return transformer;
     }
-
-    private void initializeMocks() {
-        MockitoAnnotations.initMocks(this);
-    }
-
-    protected abstract void onSetup();
 }

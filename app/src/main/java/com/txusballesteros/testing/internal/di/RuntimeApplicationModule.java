@@ -27,6 +27,7 @@ package com.txusballesteros.testing.internal.di;
 import com.txusballesteros.testing.Application;
 import com.txusballesteros.testing.data.api.endpoint.internal.di.EndpointsModule;
 import com.txusballesteros.testing.data.api.internal.di.ApiModule;
+import com.txusballesteros.testing.data.api.transformer.internal.di.TranformerModule;
 import com.txusballesteros.testing.data.cache.internal.di.CachesModule;
 import com.txusballesteros.testing.data.datasource.internal.di.DatasourcesModule;
 import com.txusballesteros.testing.data.internal.di.RepositoriesModule;
@@ -47,6 +48,7 @@ import dagger.Provides;
         DatasourcesModule.class,
         CachesModule.class,
         ApiModule.class,
+        TranformerModule.class,
         EndpointsModule.class
 })
 public class RuntimeApplicationModule implements ApplicationModule {

@@ -22,27 +22,32 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.testing;
+package com.txusballesteros.testing.data.api.transformer;
 
-import android.test.suitebuilder.annotation.SmallTest;
+import com.txusballesteros.testing.UnitTest;
 
-import org.junit.Before;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-import org.mockito.MockitoAnnotations;
+import org.junit.Test;
 
-@RunWith(JUnit4.class)
-@SmallTest
-public abstract class UnitTest {
-    @Before
-    public final void setup() {
-        initializeMocks();
-        onSetup();
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
+
+public class GiphyImageUriTransformerUnitTest extends UnitTest {
+    private final static String IMAGE_ID = "vjyl3YVgcLiWA";
+    private ImageUriTransformer transformer;
+
+    @Override
+    protected void onSetup() {
+        transformer = new GiphyImageUriTransformer();
     }
 
-    private void initializeMocks() {
-        MockitoAnnotations.initMocks(this);
-    }
+    @Test
+    public void shouldTransformImageUri() {
+        final String expectedValue = String
+                            .format(GiphyImageUriTransformer.GIPHY_IMAGE_URI_PATTERN, IMAGE_ID);
 
-    protected abstract void onSetup();
+        final String transformationResult = transformer.transform(IMAGE_ID);
+
+        assertNotNull(transformationResult);
+        assertEquals(expectedValue, transformationResult);
+    }
 }
