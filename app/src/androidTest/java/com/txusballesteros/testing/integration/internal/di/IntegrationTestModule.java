@@ -26,6 +26,7 @@ package com.txusballesteros.testing.integration.internal.di;
 
 import com.txusballesteros.testing.data.api.endpoint.internal.di.EndpointsModule;
 import com.txusballesteros.testing.data.api.internal.di.ApiModule;
+import com.txusballesteros.testing.data.api.transformer.internal.di.TranformerModule;
 import com.txusballesteros.testing.domain.usecase.internal.di.UseCasesModule;
 import com.txusballesteros.testing.presentation.internal.di.PresentationModule;
 
@@ -33,6 +34,7 @@ import dagger.Module;
 
 @Module (includes = {
         ApiModule.class,
-        EndpointsModule.class
+        EndpointsModule.class,
+        TranformerModule.class
 })
 public class IntegrationTestModule { }
